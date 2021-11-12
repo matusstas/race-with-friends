@@ -5,7 +5,6 @@ using UnityEngine;
 public class SCar : MonoBehaviour
 {
     private Rigidbody2D rb2D;
-    public float thrust = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +18,7 @@ public class SCar : MonoBehaviour
 
     }
 
-    public void Move()
+    public void Move(float thrust)
     {
         rb2D.AddForce(transform.up * thrust);
     }

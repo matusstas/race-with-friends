@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Keyboard : MonoBehaviour
 {
     public List<GameObject> cars;
+    public Slider slider;
+    public SliderController sliderController;
+
+    public float trust = 1000; 
 
     // Start is called before the first frame update
     void Start()
     {
         cars = new List<GameObject>(GameObject.FindGameObjectsWithTag("TCar"));
+        sliderController = slider.GetComponent<SliderController>();
+        Debug.Log(sliderController);
     }
 
     // Update is called once per frame
@@ -19,7 +27,7 @@ public class Keyboard : MonoBehaviour
         {
             foreach (GameObject car in cars)
             {
-                car.GetComponent<SCar>().Move();
+                car.GetComponent<SCar>().Move(5f);
             }
             
         }
@@ -37,6 +45,19 @@ public class Keyboard : MonoBehaviour
             foreach (GameObject car in cars)
             {
                 car.GetComponent<SCar>().Rotate(-3);
+            }
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            Debug.Log(slider.value);
+            if (sliderController.paused) {
+                sliderController.Continue();
+            }
+            else
+            {
+                sliderController.Pause();
+                cars[0].GetComponent<SCar>().Move(sliderController.slider.value * trust);
             }
         }
     }
