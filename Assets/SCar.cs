@@ -11,8 +11,6 @@ public class SCar : MonoBehaviour
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-
-        Debug.Log(rb2D);
     }
 
     // Update is called once per frame

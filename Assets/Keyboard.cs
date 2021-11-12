@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Keyboard : MonoBehaviour
 {
-    public GameObject[] cars;
+    public List<GameObject> cars;
 
     // Start is called before the first frame update
     void Start()
     {
-        cars = GameObject.FindGameObjectsWithTag("TCar");
+        cars = new List<GameObject>(GameObject.FindGameObjectsWithTag("TCar"));
     }
 
     // Update is called once per frame
