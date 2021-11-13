@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCar : MonoBehaviour
+public class CarController : MonoBehaviour
 {
     private Rigidbody2D rb2D;
 
@@ -23,9 +23,9 @@ public class SCar : MonoBehaviour
         rb2D.AddForce(transform.up * thrust);
     }
 
-    public void Rotate(int n)
+    public void Rotate(int angle)
     {
-        rb2D.transform.Rotate(0, 0, n);
+        rb2D.transform.Rotate(0, 0, angle);
         // rb2D.AddForce(rotate.left * thrust);
     }
 }

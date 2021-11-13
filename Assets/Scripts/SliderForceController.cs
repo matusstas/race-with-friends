@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderAngleController : MonoBehaviour
+public class SliderForceController : MonoBehaviour
 {
-    public Slider sliderAngle;
-    public bool isRunning = false;
-    public float minValue = -90f;
-    public float maxValue = 90f;
-    public float offset = 2f;
+    public Slider sliderForce;
+    public bool isRunning = true;
+    public float minValue = 0f;
+    public float maxValue = 1f;
+    public float offset = 0.01f;
     public int direction = 1;
-    
+    public Slider sliderAngle;
+
     // Start is called before the first frame update
     void Start()
-    {        
-
+    {
+        
     }
 
     // Update is called once per frame
@@ -23,27 +24,27 @@ public class SliderAngleController : MonoBehaviour
     {
         if (isRunning)
         {
-            if (sliderAngle.value > maxValue-offset)
+            if (sliderForce.value > maxValue-offset)
             {
                 direction *= -1;
             }
 
-            if (sliderAngle.value < minValue+offset)
+            if (sliderForce.value < minValue+offset)
             {
                 direction *= -1;
             }
 
-            sliderAngle.value += offset * direction;
+            sliderForce.value += offset * direction;
         }
     }
 
     public void Pause()
     {
-        isRunning = true;
+        isRunning = false;
     }
 
     public void Continue()
     {
-        isRunning = false;
+        isRunning = true;
     }
 }
