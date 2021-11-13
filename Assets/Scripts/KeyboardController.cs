@@ -12,13 +12,17 @@ public class KeyboardController : MonoBehaviour
     private SliderForceController sliderForceController;
     private SliderAngleController sliderAngleController;
     public float thrustCoeficient = 1000f;
+    private int currentCarIndex = 0;
+    public int carCount = 5;
 
     // Start is called before the first frame update
     void Start()
     {
         cars = new List<GameObject>(GameObject.FindGameObjectsWithTag("carTag"));
+        newCars(carCount - 1);
         sliderForceController = sliderForce.GetComponent<SliderForceController>();
         sliderAngleController = sliderAngle.GetComponent<SliderAngleController>();
+        NextCar();
     }
 
     // Update is called once per frame
@@ -26,41 +30,30 @@ public class KeyboardController : MonoBehaviour
     {
         if (Input.GetKey("up"))
         {
-            foreach (GameObject car in cars)
-            {
-                car.GetComponent<CarController>().Move(5f);
-            }
+            cars[currentCarIndex].GetComponent<CarController>().Move(5f);
             
         }
 
         if (Input.GetKey("left"))
         {
-            foreach (GameObject car in cars)
-            {
-                car.GetComponent<CarController>().Rotate(3f);
-            }
+            cars[currentCarIndex].GetComponent<CarController>().Rotate(3f);
         }
 
         if (Input.GetKey("right"))
         {
-            foreach (GameObject car in cars)
-            {
-                car.GetComponent<CarController>().Rotate(-3f);
-            }
+            cars[currentCarIndex].GetComponent<CarController>().Rotate(-3f);;
         }
 
         if (Input.GetKeyDown("space"))
         {
-            Debug.Log("Press A");
-            Debug.Log("Press B");
-
             if (sliderForceController.isRunning)
             {
                 sliderForceController.Pause();
                 sliderAngleController.Continue();
                 float thrust = sliderForce.value * thrustCoeficient;
-                cars[0].GetComponent<CarController>().Rotate(-sliderAngle.value);
-                cars[0].GetComponent<CarController>().Move(thrust);
+                cars[currentCarIndex].GetComponent<CarController>().Rotate(-sliderAngle.value);
+                cars[currentCarIndex].GetComponent<CarController>().Move(thrust);
+                NextCar();
             }
             else
             {
@@ -69,4 +62,31 @@ public class KeyboardController : MonoBehaviour
             }
         }
     }
+
+    private void NextCar()
+    {
+        foreach(GameObject car in cars)
+        {
+            car.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f);  // reset color back
+        }
+        currentCarIndex++;
+        if (currentCarIndex >= cars.Count)
+        {
+            currentCarIndex = 0;
+        }
+        Debug.Log("Current car index: " + currentCarIndex);
+        Debug.Log("cars.Count " + cars.Count);
+        cars[currentCarIndex].GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f);  // set current car color to red
+    }
+
+    private void newCars(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            GameObject car = Instantiate(cars[0], new Vector2(i, i), Quaternion.identity);
+            car.tag = "carTag";
+            cars.Add(car);
+        }
+    }
+    
 }

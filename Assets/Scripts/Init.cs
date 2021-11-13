@@ -15,8 +15,8 @@ public class Init : MonoBehaviour
         // Comment this scope to disable generating car objects
         for (int i = 0; i < nCars; i++) 
         {
-            GameObject car = Instantiate(prefabCar, new Vector2(i, i), Quaternion.identity);
-            car.tag = "carTag";
+            // GameObject car = Instantiate(prefabCar, new Vector2(i, i), Quaternion.identity);
+            // car.tag = "carTag";
         }
     }
 
