@@ -8,7 +8,9 @@ public class KeyboardController : MonoBehaviour
 {
     public List<GameObject> cars;
     public Slider sliderForce;
-    public SliderForceController sliderForceController;
+    public Slider sliderAngle;
+    private SliderForceController sliderForceController;
+    private SliderAngleController sliderAngleController;
     public float thrustCoeficient = 1000f;
 
     // Start is called before the first frame update
@@ -16,6 +18,7 @@ public class KeyboardController : MonoBehaviour
     {
         cars = new List<GameObject>(GameObject.FindGameObjectsWithTag("carTag"));
         sliderForceController = sliderForce.GetComponent<SliderForceController>();
+        sliderAngleController = sliderAngle.GetComponent<SliderAngleController>();
     }
 
     // Update is called once per frame
@@ -54,12 +57,14 @@ public class KeyboardController : MonoBehaviour
             if (sliderForceController.isRunning)
             {
                 sliderForceController.Pause();
+                sliderAngleController.Continue();
                 float thrust = sliderForce.value * thrustCoeficient;
                 cars[0].GetComponent<CarController>().Move(thrust);
             }
             else
             {
                 sliderForceController.Continue();
+                sliderAngleController.Pause();
             }
         }
     }

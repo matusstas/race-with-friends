@@ -775,11 +775,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8920f9cf2600f34abad24d9fb7844980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderAngle: {fileID: 771783965}
+  slider: {fileID: 771783965}
   isRunning: 1
   minValue: -90
   maxValue: 90
-  offset: 2
+  speed: 2
   direction: 1
 --- !u!114 &771783965
 MonoBehaviour:
@@ -1227,13 +1227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ea529b26c9d3844afaa6bff091e63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderForce: {fileID: 1187043727}
-  isRunning: 1
+  slider: {fileID: 1187043727}
+  isRunning: 0
   minValue: 0
   maxValue: 1
-  offset: 0.01
+  speed: 0.01
   direction: 1
-  sliderAngle: {fileID: 771783965}
 --- !u!1 &1584593768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cars: []
   sliderForce: {fileID: 1187043727}
-  sliderForceController: {fileID: 0}
+  sliderAngle: {fileID: 771783965}
   thrustCoeficient: 1000
 --- !u!4 &1868129519
 Transform:
