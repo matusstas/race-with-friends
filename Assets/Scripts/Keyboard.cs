@@ -9,6 +9,9 @@ public class Keyboard : MonoBehaviour
     public List<GameObject> cars;
     public Slider slider;
     public SliderController sliderController;
+    public Slider sliderAngle;
+
+    public SliderAngleController sliderAngleController;
 
     public float trust = 1000; 
 
@@ -17,7 +20,7 @@ public class Keyboard : MonoBehaviour
     {
         cars = new List<GameObject>(GameObject.FindGameObjectsWithTag("TCar"));
         sliderController = slider.GetComponent<SliderController>();
-        Debug.Log(sliderController);
+        sliderAngleController = slider.GetComponent<SliderAngleController>();
     }
 
     // Update is called once per frame
@@ -50,7 +53,7 @@ public class Keyboard : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
-            Debug.Log(slider.value);
+            // Debug.Log(slider.value);
             if (sliderController.paused) {
                 sliderController.Continue();
             }
