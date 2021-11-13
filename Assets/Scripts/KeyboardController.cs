@@ -37,7 +37,7 @@ public class KeyboardController : MonoBehaviour
         {
             foreach (GameObject car in cars)
             {
-                car.GetComponent<CarController>().Rotate(3);
+                car.GetComponent<CarController>().Rotate(3f);
             }
         }
 
@@ -45,7 +45,7 @@ public class KeyboardController : MonoBehaviour
         {
             foreach (GameObject car in cars)
             {
-                car.GetComponent<CarController>().Rotate(-3);
+                car.GetComponent<CarController>().Rotate(-3f);
             }
         }
 
@@ -59,6 +59,7 @@ public class KeyboardController : MonoBehaviour
                 sliderForceController.Pause();
                 sliderAngleController.Continue();
                 float thrust = sliderForce.value * thrustCoeficient;
+                cars[0].GetComponent<CarController>().Rotate(-sliderAngle.value);
                 cars[0].GetComponent<CarController>().Move(thrust);
             }
             else

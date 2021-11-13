@@ -23,7 +23,7 @@ public class CarController : MonoBehaviour
         rb2D.AddForce(transform.up * thrust);
     }
 
-    public void Rotate(int angle)
+    public void Rotate(float angle)
     {
         rb2D.transform.Rotate(0, 0, angle);
         // rb2D.AddForce(rotate.left * thrust);
