@@ -779,7 +779,7 @@ MonoBehaviour:
   isRunning: 1
   minValue: -90
   maxValue: 90
-  speed: 2
+  speed: 5
   direction: 1
 --- !u!114 &771783965
 MonoBehaviour:
@@ -1231,7 +1231,7 @@ MonoBehaviour:
   isRunning: 0
   minValue: 0
   maxValue: 1
-  speed: 0.01
+  speed: 0.05
   direction: 1
 --- !u!1 &1584593768
 GameObject:
@@ -1541,7 +1541,7 @@ MonoBehaviour:
   cars: []
   sliderForce: {fileID: 1187043727}
   sliderAngle: {fileID: 771783965}
-  thrustCoeficient: 1000
+  carCount: 5
 --- !u!4 &1868129519
 Transform:
   m_ObjectHideFlags: 0

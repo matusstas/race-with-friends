@@ -57,11 +57,20 @@ public class CarController : MonoBehaviour
         // ends preview, moves car to new position and rotates it to new angle at the same time
         RotationPreviewEnd();
 
+        // first rotate
         float time = 0.0f;
+        while (time < 1f)
+        {
+            time += Time.deltaTime;
+            carRb.transform.Rotate(0, 0, angle * Time.deltaTime);
+            yield return null;
+        }
+        time = 0.0f;
+
+        // then move forward
         while (time < duration)
         {
             time += Time.deltaTime;
-            carRb.transform.Rotate(0, 0, angle * Time.deltaTime / duration);
             carRb.AddForce(transform.up * 5);
             yield return null;
         }
