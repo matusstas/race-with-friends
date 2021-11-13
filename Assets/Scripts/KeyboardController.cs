@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class KeyboardController : MonoBehaviour
 {
     public List<GameObject> cars;
@@ -11,37 +10,41 @@ public class KeyboardController : MonoBehaviour
     public Slider sliderAngle;
     private SliderForceController sliderForceController;
     private SliderAngleController sliderAngleController;
-    public float thrustCoeficient = 1000f;
-    private int currentCarIndex = 0;
+    private int selectedCarIndex = 0;
+    private GameObject selectedCar;
     public int carCount = 5;
 
     // Start is called before the first frame update
     void Start()
     {
         cars = new List<GameObject>(GameObject.FindGameObjectsWithTag("carTag"));
-        newCars(carCount - 1);
+        selectedCar = cars[0];
+        NextCar();
+        
         sliderForceController = sliderForce.GetComponent<SliderForceController>();
         sliderAngleController = sliderAngle.GetComponent<SliderAngleController>();
-        NextCar();
+        
+        NewCars(carCount - 1);
     }
 
     // Update is called once per frame
     void Update()
     {
+        selectedCar.GetComponent<CarController>().RotationPreview(sliderForce.value, -sliderAngle.value);
+
         if (Input.GetKey("up"))
         {
-            cars[currentCarIndex].GetComponent<CarController>().Move(5f);
-            
+            selectedCar.GetComponent<CarController>().DebugMove(5f);
         }
 
         if (Input.GetKey("left"))
         {
-            cars[currentCarIndex].GetComponent<CarController>().Rotate(3f);
+            selectedCar.GetComponent<CarController>().DebugRotate(3f);
         }
 
         if (Input.GetKey("right"))
         {
-            cars[currentCarIndex].GetComponent<CarController>().Rotate(-3f);;
+            selectedCar.GetComponent<CarController>().DebugRotate(-3f);;
         }
 
         if (Input.GetKeyDown("space"))
@@ -50,9 +53,7 @@ public class KeyboardController : MonoBehaviour
             {
                 sliderForceController.Pause();
                 sliderAngleController.Continue();
-                float thrust = sliderForce.value * thrustCoeficient;
-                cars[currentCarIndex].GetComponent<CarController>().RotationPreviewEnd();
-                StartCoroutine(cars[currentCarIndex].GetComponent<CarController>().MoveAnimate(sliderForce.value, -sliderAngle.value));
+                StartCoroutine(selectedCar.GetComponent<CarController>().MoveAnimate(sliderForce.value, -sliderAngle.value));
                 NextCar();
             }
             else
@@ -61,32 +62,22 @@ public class KeyboardController : MonoBehaviour
                 sliderAngleController.Pause();
             }
         }
-
-        // rotation preview
-        if (sliderAngleController.isRunning)
-        {
-            cars[currentCarIndex].GetComponent<CarController>().RotationPreview(-sliderAngle.value);
-        }
     }
 
     private void NextCar()
     {
-        foreach(GameObject car in cars)
+        // switches control to the next car
+        selectedCarIndex++;
+        if (selectedCarIndex >= cars.Count)
         {
-            car.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f);  // reset color back
+            selectedCarIndex = 0;
         }
-        currentCarIndex++;
-        if (currentCarIndex >= cars.Count)
-        {
-            currentCarIndex = 0;
-        }
-        Debug.Log("Current car index: " + currentCarIndex);
-        Debug.Log("cars.Count " + cars.Count);
-        cars[currentCarIndex].GetComponent<CarController>().RotationPreviewStart();
+        selectedCar = cars[selectedCarIndex];
     }
 
-    private void newCars(int count)
+    private void NewCars(int count)
     {
+        // creates new car objects, count is the number of cars to create
         for (int i = 0; i < count; i++)
         {
             GameObject car = Instantiate(cars[0], new Vector2(i, i), Quaternion.identity);
