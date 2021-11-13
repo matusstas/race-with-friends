@@ -51,8 +51,8 @@ public class KeyboardController : MonoBehaviour
                 sliderForceController.Pause();
                 sliderAngleController.Continue();
                 float thrust = sliderForce.value * thrustCoeficient;
-                cars[currentCarIndex].GetComponent<CarController>().Rotate(-sliderAngle.value);
-                cars[currentCarIndex].GetComponent<CarController>().Move(thrust);
+                cars[currentCarIndex].GetComponent<CarController>().RotationPreviewEnd();
+                StartCoroutine(cars[currentCarIndex].GetComponent<CarController>().MoveAnimate(sliderForce.value, -sliderAngle.value));
                 NextCar();
             }
             else
@@ -60,6 +60,12 @@ public class KeyboardController : MonoBehaviour
                 sliderForceController.Continue();
                 sliderAngleController.Pause();
             }
+        }
+
+        // rotation preview
+        if (sliderAngleController.isRunning)
+        {
+            cars[currentCarIndex].GetComponent<CarController>().RotationPreview(-sliderAngle.value);
         }
     }
 
@@ -76,7 +82,7 @@ public class KeyboardController : MonoBehaviour
         }
         Debug.Log("Current car index: " + currentCarIndex);
         Debug.Log("cars.Count " + cars.Count);
-        cars[currentCarIndex].GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f);  // set current car color to red
+        cars[currentCarIndex].GetComponent<CarController>().RotationPreviewStart();
     }
 
     private void newCars(int count)
