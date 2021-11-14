@@ -11,6 +11,8 @@ public class CarController : MonoBehaviour
     private Quaternion initialRotation;
     private bool newCar=true;
 
+    private Color originalColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,7 @@ public class CarController : MonoBehaviour
 
         if (newCar)
         {
+            // save original car color
             GetComponent<SpriteRenderer>().color = new Color(1f, .5f - speed / 2, .5f - speed / 2);
         }
     }
@@ -47,15 +50,18 @@ public class CarController : MonoBehaviour
         initialRotation=transform.rotation;
         GetComponent<CapsuleCollider2D>().enabled = false;
         rotationPreview = true;
+        originalColor = GetComponent<SpriteRenderer>().color;
     }
 
     private void RotationPreviewEnd()
     {
         // destroys rotation preview
-        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f);
         GetComponent<CapsuleCollider2D>().enabled = true;
         rotationPreview = false;
         newCar=false;
+
+        // restore original car color 
+        GetComponent<SpriteRenderer>().color = originalColor;
     }
 
     // rotation coroutine
@@ -74,6 +80,9 @@ public class CarController : MonoBehaviour
             carRb.AddForce(transform.up * 5);
             yield return null;
         }
+
+        // wait 2 seconds for the car to stop before switching to the next car
+        yield return new WaitForSeconds(2);
 
         newCar=true;
         keycontroll.NextCar();

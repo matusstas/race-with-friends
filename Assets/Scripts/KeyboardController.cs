@@ -53,11 +53,9 @@ public class KeyboardController : MonoBehaviour
             if (sliderForceController.isRunning)
             {
                 sliderForceController.Pause();
-                //sliderAngleController.Continue();
                 StartCoroutine(selectedCar.GetComponent<CarController>().MoveAnimate(this, sliderForce.value, -sliderAngle.value));
-                //NextCar();
             }
-            else
+            else if (sliderAngleController.isRunning)
             {
                 sliderForceController.Continue();
                 sliderAngleController.Pause();
@@ -84,6 +82,10 @@ public class KeyboardController : MonoBehaviour
         {
             GameObject car = Instantiate(cars[0], new Vector2(i, i), Quaternion.identity);
             car.tag = "carTag";
+
+            // set car color to random color
+            car.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+            
             cars.Add(car);
         }
     }
