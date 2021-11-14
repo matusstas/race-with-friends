@@ -8,6 +8,8 @@ public class CarController : MonoBehaviour
     private GameObject carPreview;
     private Rigidbody2D carRb;
     private bool rotationPreview = false;
+    private Quaternion initialRotation;
+    private bool newCar=true;
 
     // Start is called before the first frame update
     void Start()
@@ -23,57 +25,59 @@ public class CarController : MonoBehaviour
 
     public void RotationPreview(float speed, float angle)
     {
-        if (!rotationPreview)
+        if (!rotationPreview && newCar) 
         {
             RotationPreviewStart();
         }
-        carPreview.transform.position = transform.position;
-        carPreview.transform.rotation = transform.rotation;
-        carPreview.GetComponent<Rigidbody2D>().transform.Rotate(0, 0, angle);
 
-        // red color based on speed, higher speed = more red
-        carPreview.GetComponent<SpriteRenderer>().color = new Color(1f, .5f - speed / 2, .5f - speed / 2);
+        else{
+            transform.rotation=initialRotation;
+            carRb.transform.Rotate(0, 0, angle);
+        }
+
+        if (newCar)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, .5f - speed / 2, .5f - speed / 2);
+        }
     }
 
 
     private void RotationPreviewStart()
     {
-        // create preview car without colider and with red color
-        carPreview = Instantiate(gameObject, transform.position, transform.rotation);
-        carPreview.GetComponent<CapsuleCollider2D>().enabled = false;
+        initialRotation=transform.rotation;
+        GetComponent<CapsuleCollider2D>().enabled = false;
         rotationPreview = true;
     }
 
-    public void RotationPreviewEnd()
+    private void RotationPreviewEnd()
     {
         // destroys rotation preview
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f);
+        GetComponent<CapsuleCollider2D>().enabled = true;
         rotationPreview = false;
-        Destroy(carPreview);
+        newCar=false;
     }
 
     // rotation coroutine
-    public IEnumerator MoveAnimate(float duration, float angle)
+    public IEnumerator MoveAnimate(KeyboardController keycontroll, float duration, float angle)
     {
         // ends preview, moves car to new position and rotates it to new angle at the same time
         RotationPreviewEnd();
 
         // first rotate
         float time = 0.0f;
-        while (time < 1f)
-        {
-            time += Time.deltaTime;
-            carRb.transform.Rotate(0, 0, angle * Time.deltaTime);
-            yield return null;
-        }
-        time = 0.0f;
 
-        // then move forward
+        //move forward
         while (time < duration)
         {
             time += Time.deltaTime;
             carRb.AddForce(transform.up * 5);
             yield return null;
         }
+
+        newCar=true;
+        keycontroll.NextCar();
+
     }
 
     public void DebugMove(float thrust)

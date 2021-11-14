@@ -19,11 +19,11 @@ public class KeyboardController : MonoBehaviour
     {
         cars = new List<GameObject>(GameObject.FindGameObjectsWithTag("carTag"));
         selectedCar = cars[0];
-        NextCar();
+        
         
         sliderForceController = sliderForce.GetComponent<SliderForceController>();
         sliderAngleController = sliderAngle.GetComponent<SliderAngleController>();
-        
+        NextCar();
         NewCars(carCount - 1);
     }
 
@@ -49,12 +49,13 @@ public class KeyboardController : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
+
             if (sliderForceController.isRunning)
             {
                 sliderForceController.Pause();
-                sliderAngleController.Continue();
-                StartCoroutine(selectedCar.GetComponent<CarController>().MoveAnimate(sliderForce.value, -sliderAngle.value));
-                NextCar();
+                //sliderAngleController.Continue();
+                StartCoroutine(selectedCar.GetComponent<CarController>().MoveAnimate(this, sliderForce.value, -sliderAngle.value));
+                //NextCar();
             }
             else
             {
@@ -64,10 +65,11 @@ public class KeyboardController : MonoBehaviour
         }
     }
 
-    private void NextCar()
+    public void NextCar()
     {
         // switches control to the next car
         selectedCarIndex++;
+        sliderAngleController.Continue();
         if (selectedCarIndex >= cars.Count)
         {
             selectedCarIndex = 0;
