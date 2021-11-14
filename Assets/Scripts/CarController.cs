@@ -55,7 +55,6 @@ public class CarController : MonoBehaviour
 
     private void RotationPreviewEnd()
     {
-        // destroys rotation preview
         GetComponent<CapsuleCollider2D>().enabled = true;
         rotationPreview = false;
         newCar=false;
@@ -64,16 +63,14 @@ public class CarController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = originalColor;
     }
 
-    // rotation coroutine
+    // car move animation coroutine
     public IEnumerator MoveAnimate(KeyboardController keycontroll, float duration, float angle)
     {
         // ends preview, moves car to new position and rotates it to new angle at the same time
         RotationPreviewEnd();
 
-        // first rotate
+        // move forward
         float time = 0.0f;
-
-        //move forward
         while (time < duration)
         {
             time += Time.deltaTime;
@@ -81,23 +78,27 @@ public class CarController : MonoBehaviour
             yield return null;
         }
 
-        // wait 2 seconds for the car to stop before switching to the next car
-        yield return new WaitForSeconds(2);
+        // wait till car stops
+        // if we don't do it, current car would not collide with the next car
+        while (carRb.velocity.magnitude > 0.1f)
+        {
+            yield return null;
+        }
 
         newCar=true;
         keycontroll.NextCar();
 
     }
 
-    public void DebugMove(float thrust)
-    {
-        // debug use only
-        carRb.AddForce(transform.up * thrust);
-    }
+    // public void DebugMove(float thrust)
+    // {
+    //     // debug use only
+    //     carRb.AddForce(transform.up * thrust);
+    // }
 
-    public void DebugRotate(float angle)
-    {
-        // debug use only
-        carRb.transform.Rotate(0, 0, angle);
-    }
+    // public void DebugRotate(float angle)
+    // {
+    //     // debug use only
+    //     carRb.transform.Rotate(0, 0, angle);
+    // }
 }

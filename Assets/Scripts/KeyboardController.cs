@@ -11,56 +11,54 @@ public class KeyboardController : MonoBehaviour
     private SliderForceController sliderForceController;
     private SliderAngleController sliderAngleController;
     private int selectedCarIndex = 0;
-    private GameObject selectedCar;
+    private CarController selectedCarController;
     public int carCount = 5;
 
     // Start is called before the first frame update
     void Start()
     {
         cars = new List<GameObject>(GameObject.FindGameObjectsWithTag("carTag"));
-        selectedCar = cars[0];
-        
-        
         sliderForceController = sliderForce.GetComponent<SliderForceController>();
         sliderAngleController = sliderAngle.GetComponent<SliderAngleController>();
-        NextCar();
-        NewCars(carCount - 1);
+        NextCar();  // select first car's controller
+        GenerateNewCars(carCount - 1);  // then generate the rest of the cars
     }
 
     // Update is called once per frame
     void Update()
     {
-        selectedCar.GetComponent<CarController>().RotationPreview(sliderForce.value, -sliderAngle.value);
-
-        if (Input.GetKey("up"))
-        {
-            selectedCar.GetComponent<CarController>().DebugMove(5f);
-        }
-
-        if (Input.GetKey("left"))
-        {
-            selectedCar.GetComponent<CarController>().DebugRotate(3f);
-        }
-
-        if (Input.GetKey("right"))
-        {
-            selectedCar.GetComponent<CarController>().DebugRotate(-3f);;
-        }
+        selectedCarController.RotationPreview(sliderForce.value, -sliderAngle.value);
 
         if (Input.GetKeyDown("space"))
         {
 
-            if (sliderForceController.isRunning)
-            {
-                sliderForceController.Pause();
-                StartCoroutine(selectedCar.GetComponent<CarController>().MoveAnimate(this, sliderForce.value, -sliderAngle.value));
-            }
-            else if (sliderAngleController.isRunning)
+            if (sliderAngleController.isRunning)
             {
                 sliderForceController.Continue();
                 sliderAngleController.Pause();
             }
+            else if (sliderForceController.isRunning)
+            {
+                sliderForceController.Pause();
+                StartCoroutine(selectedCarController.MoveAnimate(this, sliderForce.value, -sliderAngle.value));
+            }
+            
         }
+
+        // if (Input.GetKey("up"))
+        // {
+        //     selectedCarController.DebugMove(5f);
+        // }
+
+        // if (Input.GetKey("left"))
+        // {
+        //     selectedCarController.DebugRotate(3f);
+        // }
+
+        // if (Input.GetKey("right"))
+        // {
+        //     selectedCarController.DebugRotate(-3f);;
+        // }
     }
 
     public void NextCar()
@@ -72,10 +70,10 @@ public class KeyboardController : MonoBehaviour
         {
             selectedCarIndex = 0;
         }
-        selectedCar = cars[selectedCarIndex];
+        selectedCarController = cars[selectedCarIndex].GetComponent<CarController>();
     }
 
-    private void NewCars(int count)
+    private void GenerateNewCars(int count)
     {
         // creates new car objects, count is the number of cars to create
         for (int i = 0; i < count; i++)
@@ -85,7 +83,7 @@ public class KeyboardController : MonoBehaviour
 
             // set car color to random color
             car.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-            
+
             cars.Add(car);
         }
     }
