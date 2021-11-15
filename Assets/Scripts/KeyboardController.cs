@@ -29,6 +29,23 @@ public class KeyboardController : MonoBehaviour
     {
         selectedCarController.RotationPreview(sliderForce.value, -sliderAngle.value);
 
+
+         if (Input.GetKeyDown("enter") || Input.GetKeyDown("return"))
+        {
+            Debug.Log("ENTER");
+            string boost=selectedCar.GetComponent<CarController>().boost;
+            Debug.Log(boost);
+            if(boost!="")
+            {
+                Debug.Log("POUZITY BOOST: "+boost);
+                selectedCar.GetComponent<CarController>().UseBoost()
+            }
+            else
+            {
+                Debug.Log("NEMAS");
+            }
+        }
+
         if (Input.GetKeyDown("space"))
         {
 

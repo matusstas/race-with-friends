@@ -10,6 +10,7 @@ public class CarController : MonoBehaviour
     private bool rotationPreview = false;
     private Quaternion initialRotation;
     private bool newCar=true;
+    public string boost="";
 
     private Color originalColor;
 
@@ -47,6 +48,7 @@ public class CarController : MonoBehaviour
 
     private void RotationPreviewStart()
     {
+        Debug.Log("BOOST: "+boost);
         initialRotation=transform.rotation;
         GetComponent<CapsuleCollider2D>().enabled = false;
         rotationPreview = true;
@@ -90,6 +92,10 @@ public class CarController : MonoBehaviour
 
     }
 
+    public Void UseBoost(string boost){
+        
+    }
+    
     // public void DebugMove(float thrust)
     // {
     //     // debug use only
