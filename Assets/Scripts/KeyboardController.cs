@@ -33,12 +33,12 @@ public class KeyboardController : MonoBehaviour
          if (Input.GetKeyDown("enter") || Input.GetKeyDown("return"))
         {
             Debug.Log("ENTER");
-            string boost=selectedCar.GetComponent<CarController>().boost;
+            string boost=selectedCarController.GetComponent<CarController>().boost;
             Debug.Log(boost);
             if(boost!="")
             {
                 Debug.Log("POUZITY BOOST: "+boost);
-                selectedCar.GetComponent<CarController>().UseBoost()
+                selectedCarController.GetComponent<CarController>().UseBoost();
             }
             else
             {

@@ -92,10 +92,11 @@ public class CarController : MonoBehaviour
 
     }
 
-    public Void UseBoost(string boost){
-        
+    public void UseBoost(){
+        Debug.Log("POUZIVAM "+boost);
+        boost="";
     }
-    
+
     // public void DebugMove(float thrust)
     // {
     //     // debug use only
