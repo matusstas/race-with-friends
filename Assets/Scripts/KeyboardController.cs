@@ -80,6 +80,11 @@ public class KeyboardController : MonoBehaviour
             winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().debugName + "</color> " + " won!";
             Time.timeScale = 0;
         }
+        if (cars.Count == 0)
+        {
+            winnerText.text = "No one won!";
+            Time.timeScale = 0;
+        }
     }
 
     private void HideDeadCars() {
