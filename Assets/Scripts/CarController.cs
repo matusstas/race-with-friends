@@ -11,6 +11,8 @@ public class CarController : MonoBehaviour
     private Quaternion initialRotation;
     private bool newCar=true;
     public string boost="";
+    public float health=100;
+    public string debugName; // car name for console logs
 
     private Color originalColor;
 
@@ -97,15 +99,20 @@ public class CarController : MonoBehaviour
         boost="";
     }
 
-    // public void DebugMove(float thrust)
-    // {
-    //     // debug use only
-    //     carRb.AddForce(transform.up * thrust);
-    // }
+    // on colision with other car decrease health based on speed
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "carTag")
+        {
+            float speed = collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
+            health -= speed * 10;
+        }
+    }
 
-    // public void DebugRotate(float angle)
-    // {
-    //     // debug use only
-    //     carRb.transform.Rotate(0, 0, angle);
-    // }
+    // hide car
+    public void HideCar()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
+    }
 }
