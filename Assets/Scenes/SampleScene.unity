@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 18714302}
   - component: {fileID: 18714301}
   m_Layer: 0
-  m_Name: Text
+  m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -627,8 +627,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.8150024, y: 0}
-  m_SizeDelta: {x: 556.19, y: 58.12}
+  m_AnchoredPosition: {x: 6.8150024, y: -6.23}
+  m_SizeDelta: {x: 556.19, y: 180.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &516986093
 MonoBehaviour:
@@ -770,6 +770,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &545319217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8058020942556772746, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
+  m_PrefabInstance: {fileID: 565261934}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &565261934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -779,19 +784,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8058020942556772746, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
       propertyPath: m_Name
-      value: prefabCar
+      value: carTemplate
       objectReference: {fileID: 0}
     - target: {fileID: 8058020942556772749, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8058020942556772749, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.07
+      value: -10.91
       objectReference: {fileID: 0}
     - target: {fileID: 8058020942556772749, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.56
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 8058020942556772749, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1733,7 +1738,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1634602196
 GameObject:
@@ -1979,9 +1984,10 @@ MonoBehaviour:
   cars: []
   sliderForce: {fileID: 1187043727}
   sliderAngle: {fileID: 771783965}
-  carCount: 5
+  carCount: 15
   healthText: {fileID: 18714301}
   winnerText: {fileID: 516986093}
+  carTemplate: {fileID: 545319217}
 --- !u!4 &1868129519
 Transform:
   m_ObjectHideFlags: 0
@@ -1994,7 +2000,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1921691445
 GameObject:
