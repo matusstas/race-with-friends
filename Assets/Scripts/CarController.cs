@@ -10,7 +10,7 @@ public class CarController : MonoBehaviour
     private bool rotationPreview = false;
     private Quaternion initialRotation;
     private bool newCar=true;
-    public GameObject boost;
+    public BoostAction boost=null;
     public float health=100;
     public string debugName; // car name for console logs
 

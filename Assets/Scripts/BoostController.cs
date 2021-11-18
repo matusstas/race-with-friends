@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BoostController : MonoBehaviour
 {
@@ -20,9 +21,11 @@ public class BoostController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("ZOBRATY BOOST");
-        Debug.Log(other.name);
+        Debug.Log(other.GetComponent<CarController>().debugName);
         other.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
-        other.GetComponent<CarController>().boost = gameObject;
-        Destroy(gameObject);
+        other.GetComponent<CarController>().boost = gameObject.GetComponent<BoostAction>();
+        Debug.Log(other.GetComponent<CarController>().boost);
+        Debug.Log(gameObject.name);
+        gameObject.SetActive(false);
     }
 }
