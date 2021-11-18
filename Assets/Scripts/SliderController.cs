@@ -9,6 +9,7 @@ public abstract class SliderController : MonoBehaviour
     public bool isRunning = true;
     public float minValue = 0f;
     public float maxValue = 1f;
+    public float defaultSpeed = 0.01f;
     public float speed = 0.01f;
     public int direction = 1;
 

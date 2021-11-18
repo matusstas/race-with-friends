@@ -10,7 +10,7 @@ public class CarController : MonoBehaviour
     private bool rotationPreview = false;
     private Quaternion initialRotation;
     private bool newCar=true;
-    public string boost="";
+    public GameObject boost;
     public float health=100;
     public string debugName; // car name for console logs
 
@@ -78,7 +78,7 @@ public class CarController : MonoBehaviour
         while (time < duration)
         {
             time += Time.deltaTime;
-            carRb.AddForce(transform.up * 5);
+            carRb.AddForce(transform.up * 50);
             yield return null;
         }
 
@@ -96,7 +96,7 @@ public class CarController : MonoBehaviour
 
     public void UseBoost(){
         Debug.Log("POUZIVAM "+boost);
-        boost="";
+        boost=null;
     }
 
     // on colision with other car decrease health based on speed

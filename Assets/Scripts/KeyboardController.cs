@@ -22,6 +22,7 @@ public class KeyboardController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
         cars = new List<GameObject>();
         sliderForceController = sliderForce.GetComponent<SliderForceController>();
         sliderAngleController = sliderAngle.GetComponent<SliderAngleController>();
@@ -34,15 +35,15 @@ public class KeyboardController : MonoBehaviour
     {
         selectedCarController.RotationPreview(sliderForce.value, -sliderAngle.value);
 
-
-         if (Input.GetKeyDown("enter") || Input.GetKeyDown("return"))
+        // enter = big enter, return = small enter
+        if (Input.GetKeyDown("enter") || Input.GetKeyDown("return"))
         {
             Debug.Log("ENTER");
-            string boost=selectedCarController.GetComponent<CarController>().boost;
+            GameObject boost=selectedCarController.GetComponent<CarController>().boost;
             Debug.Log(boost);
-            if(boost!="")
+            if(boost!=null)
             {
-                Debug.Log("POUZITY BOOST: "+boost);
+                Debug.Log("POUZITY BOOST: "+boost.name);
                 selectedCarController.GetComponent<CarController>().UseBoost();
             }
             else
