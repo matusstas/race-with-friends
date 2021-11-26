@@ -38,7 +38,6 @@ public class KeyboardController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(selectedCarController);
         selectedCarController.RotationPreview(sliderForce.value, -sliderAngle.value);
 
         // enter = big enter, return = small enter

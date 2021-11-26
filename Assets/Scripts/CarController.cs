@@ -9,9 +9,9 @@ public class CarController : MonoBehaviour
     private Rigidbody2D carRb;
     private bool rotationPreview = false;
     private Quaternion initialRotation;
-    private bool newCar=true;
-    public BoostAction boost=null;
-    public float health=100;
+    private bool newCar = true;
+    public BoostAction boost = null;
+    public float health = 100;
     public string debugName; // car name for console logs
 
     private Color originalColor;
@@ -30,13 +30,14 @@ public class CarController : MonoBehaviour
 
     public void RotationPreview(float speed, float angle)
     {
-        if (!rotationPreview && newCar) 
+        if (!rotationPreview && newCar)
         {
             RotationPreviewStart();
         }
 
-        else{
-            transform.rotation=initialRotation;
+        else
+        {
+            transform.rotation = initialRotation;
             carRb.transform.Rotate(0, 0, angle);
         }
 
@@ -50,8 +51,8 @@ public class CarController : MonoBehaviour
 
     private void RotationPreviewStart()
     {
-        Debug.Log("BOOST: "+boost);
-        initialRotation=transform.rotation;
+        Debug.Log("BOOST: " + boost);
+        initialRotation = transform.rotation;
         GetComponent<CapsuleCollider2D>().enabled = false;
         rotationPreview = true;
         originalColor = GetComponent<SpriteRenderer>().color;
@@ -61,7 +62,7 @@ public class CarController : MonoBehaviour
     {
         GetComponent<CapsuleCollider2D>().enabled = true;
         rotationPreview = false;
-        newCar=false;
+        newCar = false;
 
         // restore original car color 
         GetComponent<SpriteRenderer>().color = originalColor;
@@ -75,10 +76,16 @@ public class CarController : MonoBehaviour
 
         // move forward
         float time = 0.0f;
+        float direction = duration > 0 ? 1f : -1f;
+        duration = Mathf.Abs(duration);
+
+
         while (time < duration)
         {
             time += Time.deltaTime;
-            carRb.AddForce(transform.up * 50);
+
+            carRb.AddForce(transform.up * 50 * direction);
+
             yield return null;
         }
 
@@ -89,14 +96,15 @@ public class CarController : MonoBehaviour
             yield return null;
         }
 
-        newCar=true;
+        newCar = true;
         keycontroll.NextCar();
 
     }
 
-    public void UseBoost(){
-        Debug.Log("POUZIVAM "+boost);
-        boost=null;
+    public void UseBoost()
+    {
+        Debug.Log("POUZIVAM " + boost);
+        boost = null;
     }
 
     // on colision with other car decrease health based on speed

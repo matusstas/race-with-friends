@@ -31,12 +31,12 @@ public abstract class SliderController : MonoBehaviour
     {
         if (isRunning)
         {
-            if (slider.value > maxValue-speed)
+            if (slider.value >= maxValue-speed)
             {
                 direction *= -1;
             }
 
-            if (slider.value < minValue+speed)
+            if (slider.value <= minValue+speed)
             {
                 direction *= -1;
             }
