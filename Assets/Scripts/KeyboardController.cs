@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class KeyboardController : MonoBehaviour
 {
+
     public List<GameObject> cars;
+
     public Slider sliderForce;
     public Slider sliderAngle;
     private SliderForceController sliderForceController;
@@ -17,22 +19,26 @@ public class KeyboardController : MonoBehaviour
     public Text healthText;
     public Text winnerText;
 
-    public GameObject carTemplate;
 
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
-        cars = new List<GameObject>();
         sliderForceController = sliderForce.GetComponent<SliderForceController>();
         sliderAngleController = sliderAngle.GetComponent<SliderAngleController>();
-        GenerateNewCars(carCount);  // then generate the rest of the cars
+
+        // get all cars with tag "carTag"
+        GameObject[] carObjects = GameObject.FindGameObjectsWithTag("carTag");
+        Debug.Log(carObjects[0].name);
+        cars = new List<GameObject>(carObjects);
+
         NextCar();  // select the first car
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(selectedCarController);
         selectedCarController.RotationPreview(sliderForce.value, -sliderAngle.value);
 
         // enter = big enter, return = small enter
@@ -107,6 +113,12 @@ public class KeyboardController : MonoBehaviour
 
     public void NextCar()
     {
+        // if no cars in the list
+        if (cars.Count == 0)
+        {
+            Debug.Log("No cars");
+        }
+
         // switch control to the next car
         selectedCarIndex++;
         sliderAngleController.Continue();
@@ -115,46 +127,10 @@ public class KeyboardController : MonoBehaviour
             selectedCarIndex = 0;
         }
         selectedCarController = cars[selectedCarIndex].GetComponent<CarController>();
+
+
     }
 
-    private Vector2 GetRandomPosition(float circleCistance) {
-        // generate random 2d position that is not close to the other objects
-        Vector2 position = new Vector2(Random.Range(-7, 7), Random.Range(-4, 4));
-        while (Physics2D.OverlapCircle(position, circleCistance))
-        {
-            position = new Vector2(Random.Range(-7, 7), Random.Range(-4, 4));
-            circleCistance -= 0.01f;  // fallback if there is nowhere to place the object in the chosen distance
-        }
-        return position;
-    }
-
-    private void GenerateNewCars(int count)
-    {
-        // creates new car objects, count is the number of cars to create
-        for (int i = 0; i < count; i++)
-        {
-            // get random 2d position that isn't too close to other objects
-            Vector2 randomPosition = GetRandomPosition(2f);
-
-            // random rotation
-            float randomRotation = Random.Range(0, 360);
-
-            // create new car
-            GameObject newCar = Instantiate(carTemplate, randomPosition, Quaternion.Euler(0, 0, randomRotation));
-
-            newCar.tag = "carTag";
-
-            // set car color to random color
-            newCar.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-            cars.Add(newCar);
-        }
-
-        // update debugname for all cars
-        foreach (GameObject car in cars)
-        {
-            car.GetComponent<CarController>().debugName = "Car" + cars.IndexOf(car);
-        }
-    }
 
     private void UpdateGUI()
     {
