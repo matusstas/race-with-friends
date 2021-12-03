@@ -5,6 +5,8 @@ using UnityEngine;
 public class CarsController : MonoBehaviour
 {
     public List<GameObject> cars;
+
+    [HideInInspector]
     public GameObject selectedCar = null;
     private int selectedCarIndex = -1;  // -1 means no car selected
 
@@ -29,10 +31,7 @@ public class CarsController : MonoBehaviour
 
     private void CarStateChanged(CarState carState)
     {
-        // if (carState == CarState.NOT_SELECTED)
-        // {
-        //     SelectNextCar();
-        // }
+
     }
 
 
@@ -45,7 +44,28 @@ public class CarsController : MonoBehaviour
 
     void Update()
     {
-        
+        RemoveDestroyedCars();  // it should work without this line (only using CarDestroyed event), but it doesn't work without it if multiple cars are destroyed in one frame
+    }
+
+    private void RemoveDestroyedCars()
+    {
+        int newIndex = selectedCarIndex;
+
+        for (int i = 0; i < cars.Count; i++)
+        {
+            if (cars[i] == null)
+            {
+                if (i < selectedCarIndex)
+                {
+                    newIndex--;
+                }
+                cars.RemoveAt(i);
+            }
+        }
+        if (selectedCar == null)
+        {
+            SelectNextCar();
+        }
     }
 
     // delete destroyed cars from list

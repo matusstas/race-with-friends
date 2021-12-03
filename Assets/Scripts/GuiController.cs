@@ -9,8 +9,8 @@ public class GuiController : MonoBehaviour
 
     public Slider sliderForce;
     public Slider sliderAngle;
-    private SliderForceController sliderForceController;
-    private SliderAngleController sliderAngleController;
+    private SliderController sliderForceController;
+    private SliderController sliderAngleController;
 
 
     public Text healthText;
@@ -19,8 +19,8 @@ public class GuiController : MonoBehaviour
     // subscribe to events
     void Awake()
     {
-        sliderAngleController = sliderAngle.GetComponent<SliderAngleController>();
-        sliderForceController = sliderForce.GetComponent<SliderForceController>();
+        sliderAngleController = sliderAngle.GetComponent<SliderController>();
+        sliderForceController = sliderForce.GetComponent<SliderController>();
         sliderAngle.interactable = false;
         sliderForce.interactable = false;
 

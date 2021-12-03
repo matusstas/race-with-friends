@@ -626,7 +626,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420030}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   - component: {fileID: 519420035}
@@ -645,20 +644,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
---- !u!114 &519420030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a3fcd5a7d49bc057baa259e4967d984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabCar: {fileID: 8058020942556772746, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
-  nCars: 2
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1048,11 +1033,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 771783961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8920f9cf2600f34abad24d9fb7844980, type: 3}
+  m_Script: {fileID: 11500000, guid: d268bcae4cf4ae14abf09cd8e1ff91c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 771783965}
-  isRunning: 0
+  isRunning: 1
   minValue: -90
   maxValue: 90
   defaultSpeed: 0.01
@@ -1490,7 +1475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1187043726}
   - component: {fileID: 1187043727}
-  - component: {fileID: 1187043729}
+  - component: {fileID: 1187043728}
   m_Layer: 0
   m_Name: SliderForce
   m_TagString: Untagged
@@ -1566,13 +1551,13 @@ MonoBehaviour:
   m_HandleRect: {fileID: 725773252}
   m_Direction: 0
   m_MinValue: -0.25
-  m_MaxValue: 1
+  m_MaxValue: 0.75
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1187043729
+--- !u!114 &1187043728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1581,13 +1566,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1187043725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82ea529b26c9d3844afaa6bff091e63b, type: 3}
+  m_Script: {fileID: 11500000, guid: d268bcae4cf4ae14abf09cd8e1ff91c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1187043727}
-  isRunning: 0
+  isRunning: 1
   minValue: -0.25
-  maxValue: 1
+  maxValue: 0.75
   defaultSpeed: 0.01
   speed: 0.05
   direction: 1
