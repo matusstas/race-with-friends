@@ -23,13 +23,8 @@ public class CarController : MonoBehaviour
 
     public CarState carState;
 
-    public bool isSelected = false;  // updated by CarsController. Only one car is selected at the same time
-
     public float previewForce = 0;
     public float previewAngle = 0;
-
-    public UnityEvent CarStateChangedEvent;
-
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +38,7 @@ public class CarController : MonoBehaviour
         // Detroy car if health is 0
         if (health <= 0)
         {
+            GlobalEvents.CarDestroyed.Invoke(gameObject);
             Destroy(gameObject);
         }
         if (carState == CarState.SELECTING_ANGLE)
@@ -52,8 +48,8 @@ public class CarController : MonoBehaviour
         else if (carState == CarState.SELECTING_SPEED)
         {
             colorPreview.UpdatePreview(new Color(1f, .5f - previewForce / 2, .5f - previewForce / 2));
-            Debug.Log(name + " previewForce " + previewForce);
-            Debug.Log(name + " previewAngle " + previewAngle);
+            // Debug.Log(name + " previewForce " + previewForce);
+            // Debug.Log(name + " previewAngle " + previewAngle);
         }
         else if (carState == CarState.ANIMATING)
         {
@@ -96,7 +92,7 @@ public class CarController : MonoBehaviour
         // if state has changed, send UnityEvent carStateChanged
         if (previousState != carState)
         {
-            CarStateChangedEvent.Invoke();
+            GlobalEvents.CarStateChanged.Invoke(carState);
         }
     }
 
@@ -130,6 +126,8 @@ public class CarController : MonoBehaviour
         previewAngle = 0;
 
         carState = CarState.NOT_SELECTED;
+        GlobalEvents.CarStateChanged.Invoke(carState);
+        GlobalEvents.CarTurnEnd.Invoke();
     }
 
     public void UseBoost()

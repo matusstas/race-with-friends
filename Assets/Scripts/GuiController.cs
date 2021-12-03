@@ -16,20 +16,39 @@ public class GuiController : MonoBehaviour
     public Text healthText;
     public Text winnerText;
 
-
-    // Start is called before the first frame update
-    void Start()
+    // subscribe to events
+    void Awake()
     {
         sliderAngleController = sliderAngle.GetComponent<SliderAngleController>();
         sliderForceController = sliderForce.GetComponent<SliderForceController>();
         sliderAngle.interactable = false;
         sliderForce.interactable = false;
+
+        // add listener
+        GlobalEvents.CarStateChanged.AddListener(CarStateChanged);
+        GlobalEvents.CarDestroyed.AddListener(CheckWinCondition);
+
+    }
+
+    // onDestroy unsubscribe from events
+    void OnDestroy()
+    {
+        // remove listener
+        GlobalEvents.CarStateChanged.RemoveListener(CarStateChanged);
+        GlobalEvents.CarDestroyed.RemoveListener(CheckWinCondition);
+
+    }
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckWinCondition();
         UpdateCarHealthGUI();
         UpdateSlidersGUI();
     }
@@ -46,18 +65,16 @@ public class GuiController : MonoBehaviour
         }
     }
 
-    public void CarStateChanged()
+    private void CarStateChanged(CarState carState)
     {
         UpdateSlidersGUI();
-        // get currentCar state
-        CarState currentCarState = carsController.selectedCar.GetComponent<CarController>().carState;
-        if (currentCarState == CarState.SELECTING_ANGLE)
+        if (carState == CarState.SELECTING_ANGLE)  // at the start it is null
         {
 
             sliderForceController.Pause();
             sliderAngleController.Continue();
         }
-        else if (currentCarState == CarState.SELECTING_SPEED)
+        else if (carState == CarState.SELECTING_SPEED)
         {
             sliderForceController.Continue();
             sliderAngleController.Pause();
@@ -67,8 +84,6 @@ public class GuiController : MonoBehaviour
             sliderAngleController.Pause();
             sliderForceController.Pause();
         }
-
-
     }
 
     private void UpdateCarHealthGUI()
@@ -87,10 +102,11 @@ public class GuiController : MonoBehaviour
     }
 
 
-    private void CheckWinCondition()
+    private void CheckWinCondition(GameObject carToBeDestroyed)
     {
+        int carCount = carsController.cars.Count;
         // pause the game if only one car is left
-        if (carsController.cars.Count == 1)
+        if (carCount == 1)
         {
             // get first carController
             GameObject winner = carsController.cars[0];
@@ -101,7 +117,7 @@ public class GuiController : MonoBehaviour
         }
 
         // or if no one is left
-        if (carsController.cars.Count == 0)
+        if (carCount == 0)
         {
             winnerText.text = "No one won!";
             Time.timeScale = 0;

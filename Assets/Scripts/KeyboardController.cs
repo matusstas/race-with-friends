@@ -20,12 +20,12 @@ public class KeyboardController : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             Debug.Log("space");
-            carsController.selectedCar.GetComponent<CarController>().NextState();
+            carsController?.selectedCar.GetComponent<CarController>().NextState();
         }
 
         if (Input.GetKeyDown("enter") || Input.GetKeyDown("return"))
         {
-            carsController.selectedCar.GetComponent<CarController>().UseBoost();
+            carsController?.selectedCar.GetComponent<CarController>().UseBoost();
         }
     }
 }
