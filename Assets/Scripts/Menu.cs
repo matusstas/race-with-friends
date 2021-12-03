@@ -8,6 +8,7 @@ public class Menu : MonoBehaviour
 {
     public Button autodromBtn;
     public Button raceBtn;
+    public Button drawRaceBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,7 @@ public class Menu : MonoBehaviour
         // listener to click event
         autodromBtn.onClick.AddListener(AutodromBtnClick);
         raceBtn.onClick.AddListener(RaceBtnClick);
+        drawRaceBtn.onClick.AddListener(DrawRaceBtnClick);
     }
 
     // Update is called once per frame
@@ -36,5 +38,12 @@ public class Menu : MonoBehaviour
         // load Race scene
         SceneManager.LoadScene("Race");
     }
+
+    public void DrawRaceBtnClick() {
+        SceneManager.LoadScene("DrawRace");
+    }
+
+
+
 
 }

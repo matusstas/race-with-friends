@@ -764,7 +764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8058020942556772749, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8058020942556772749, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
       propertyPath: m_LocalScale.x
@@ -1038,8 +1038,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 771783965}
   isRunning: 1
-  minValue: -90
-  maxValue: 90
   defaultSpeed: 0.01
   speed: 5
   direction: 1
@@ -1429,6 +1427,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1140216786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1140216788}
+  - component: {fileID: 1140216787}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1140216787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140216786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12c90813d99d0c44b2cfbad1cf6b9a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linePrefab: {fileID: 6101358714943693066, guid: 60f8ab19a5e527d4fb0a3e4e0b878532, type: 3}
+  drawnPositions: []
+--- !u!4 &1140216788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140216786}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1157513070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,8 +1614,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 1187043727}
   isRunning: 1
-  minValue: -0.25
-  maxValue: 0.75
   defaultSpeed: 0.01
   speed: 0.05
   direction: 1
@@ -1960,7 +2001,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3366671019772660485, guid: 463e45b0baaa96040bb0b8db8a85cc65, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3366671019772660485, guid: 463e45b0baaa96040bb0b8db8a85cc65, type: 3}
       propertyPath: m_LocalPosition.x
