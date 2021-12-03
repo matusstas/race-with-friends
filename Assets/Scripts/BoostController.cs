@@ -21,7 +21,7 @@ public class BoostController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("ZOBRATY BOOST");
-        Debug.Log(other.GetComponent<CarController>().debugName);
+        Debug.Log(other.GetComponent<CarController>().name);
         other.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
         other.GetComponent<CarController>().boost = gameObject.GetComponent<BoostAction>();
         Debug.Log(other.GetComponent<CarController>().boost);

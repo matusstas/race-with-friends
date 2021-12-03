@@ -8,9 +8,17 @@ public class AutodromInit : MonoBehaviour
 
     public GameObject carTemplate;
 
+
     void Awake()
     {
+        if (carCount < 1)
+        {
+            Debug.LogError("carCount has to be greater than 0");
+        }
         GenerateNewCars(carCount);  // then generate the rest of the cars
+
+        // add "SelectedCar" tag to the first car
+        GameObject firstCar = GameObject.FindGameObjectsWithTag("Car")[0];
     }
 
     // Start is called before the first frame update
@@ -32,7 +40,7 @@ public class AutodromInit : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             // get random 2d position that isn't too close to other objects
-            Vector2 randomPosition = GetRandomPosition(2f);
+            Vector2 randomPosition = Helpers.GetRandomPosition(2f);
 
             // random rotation
             float randomRotation = Random.Range(0, 360);
@@ -40,8 +48,8 @@ public class AutodromInit : MonoBehaviour
             // create new car
             GameObject newCar = Instantiate(carTemplate, randomPosition, Quaternion.Euler(0, 0, randomRotation));
 
-            newCar.tag = "carTag";
-            newCar.GetComponent<CarController>().debugName = "Car" + i;
+            newCar.tag = "Car";
+            newCar.GetComponent<CarController>().name = "Car" + i;
 
             // set car color to random color
             newCar.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
@@ -51,16 +59,6 @@ public class AutodromInit : MonoBehaviour
     }
 
 
-    private static Vector2 GetRandomPosition(float circleCistance)
-    {
-        // generate random 2d position that is not close to the other objects
-        Vector2 position = new Vector2(Random.Range(-7, 7), Random.Range(-4, 4));
-        while (Physics2D.OverlapCircle(position, circleCistance))
-        {
-            position = new Vector2(Random.Range(-7, 7), Random.Range(-4, 4));
-            circleCistance -= 0.01f;  // fallback if there is nowhere to place the object in the chosen distance
-        }
-        return position;
-    }
+
 
 }

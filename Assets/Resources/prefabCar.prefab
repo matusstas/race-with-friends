@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8058020942556772750}
   m_Layer: 0
   m_Name: prefabCar
-  m_TagString: carTag
+  m_TagString: Undefined
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82173cc9a2822f18a8d0ac13c651df58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boost: {fileID: 0}
+  health: 100
+  debugName: 
 --- !u!50 &8058020942556772750
 Rigidbody2D:
   serializedVersion: 4

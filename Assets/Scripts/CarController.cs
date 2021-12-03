@@ -1,20 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+
+public enum CarState
+{
+    NOT_SELECTED,
+    SELECTING_ANGLE,
+    SELECTING_SPEED,
+    ANIMATING
+}
 
 public class CarController : MonoBehaviour
 {
-    private GameObject carPreview;
     private Rigidbody2D carRb;
-    private bool rotationPreview = false;
-    private Quaternion initialRotation;
-    private bool newCar = true;
+    private RotationPreview rotationPreview;
+    private ColorPreview colorPreview;
+
     public BoostAction boost = null;
     public float health = 100;
-    public string debugName; // car name for console logs
 
-    private Color originalColor;
+    public CarState carState;
+
+    public bool isSelected = false;  // updated by CarsController. Only one car is selected at the same time
+
+    public float previewForce = 0;
+    public float previewAngle = 0;
+
+    public UnityEvent CarStateChangedEvent;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,62 +40,76 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    public void RotationPreview(float speed, float angle)
-    {
-        if (!rotationPreview && newCar)
+        // Detroy car if health is 0
+        if (health <= 0)
         {
-            RotationPreviewStart();
+            Destroy(gameObject);
         }
-
-        else
+        if (carState == CarState.SELECTING_ANGLE)
         {
-            transform.rotation = initialRotation;
-            carRb.transform.Rotate(0, 0, angle);
+            rotationPreview.UpdatePreview(previewAngle);
         }
-
-        if (newCar)
+        else if (carState == CarState.SELECTING_SPEED)
         {
-            // save original car color
-            GetComponent<SpriteRenderer>().color = new Color(1f, .5f - speed / 2, .5f - speed / 2);
+            colorPreview.UpdatePreview(new Color(1f, .5f - previewForce / 2, .5f - previewForce / 2));
+            Debug.Log(name + " previewForce " + previewForce);
+            Debug.Log(name + " previewAngle " + previewAngle);
+        }
+        else if (carState == CarState.ANIMATING)
+        {
+            // wait for animation to finish
         }
     }
 
-
-    private void RotationPreviewStart()
+    public void NextState()
     {
-        Debug.Log("BOOST: " + boost);
-        initialRotation = transform.rotation;
-        GetComponent<CapsuleCollider2D>().enabled = false;
-        rotationPreview = true;
-        originalColor = GetComponent<SpriteRenderer>().color;
-    }
+        CarState previousState = carState;
 
-    private void RotationPreviewEnd()
-    {
-        GetComponent<CapsuleCollider2D>().enabled = true;
-        rotationPreview = false;
-        newCar = false;
+        if (carState == CarState.NOT_SELECTED)
+        {
+            GetComponent<CapsuleCollider2D>().enabled = false;
+            rotationPreview = new RotationPreview(this);
+            colorPreview = new ColorPreview(this);
+            carState = CarState.SELECTING_ANGLE;
+        }
+        else if (carState == CarState.SELECTING_ANGLE)
+        {
+            carState = CarState.SELECTING_SPEED;
+        }
+        else if (carState == CarState.SELECTING_SPEED)
+        {
 
-        // restore original car color 
-        GetComponent<SpriteRenderer>().color = originalColor;
+            GetComponent<CapsuleCollider2D>().enabled = true;
+            colorPreview.ResetPreview();
+
+            colorPreview = null;
+            rotationPreview = null;
+
+            Debug.Log(name + " previewForce " + previewForce);
+            Debug.Log(name + " previewAngle " + previewAngle);
+
+            carState = CarState.ANIMATING;
+            StartCoroutine(MoveAnimate());  // coroutine will change the state to NOT_SELECTED after animation is done
+        }
+        Debug.Log(name + " carState" + carState);
+
+        // if state has changed, send UnityEvent carStateChanged
+        if (previousState != carState)
+        {
+            CarStateChangedEvent.Invoke();
+        }
     }
 
     // car move animation coroutine
-    public IEnumerator MoveAnimate(KeyboardController keycontroll, float duration, float angle)
+    public IEnumerator MoveAnimate()
     {
-        // ends preview, moves car to new position and rotates it to new angle at the same time
-        RotationPreviewEnd();
-
         // move forward
         float time = 0.0f;
-        float direction = duration > 0 ? 1f : -1f;
-        duration = Mathf.Abs(duration);
+        float direction = previewForce > 0 ? 1f : -1f;
+        previewForce = Mathf.Abs(previewForce);
 
 
-        while (time < duration)
+        while (time < previewForce)
         {
             time += Time.deltaTime;
 
@@ -96,9 +125,11 @@ public class CarController : MonoBehaviour
             yield return null;
         }
 
-        newCar = true;
-        keycontroll.NextCar();
+        // reset previewForce and previewAngle back to zero
+        previewForce = 0;
+        previewAngle = 0;
 
+        carState = CarState.NOT_SELECTED;
     }
 
     public void UseBoost()
@@ -110,17 +141,10 @@ public class CarController : MonoBehaviour
     // on colision with other car decrease health based on speed
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "carTag")
+        if (collision.gameObject.tag == "Car")
         {
             float speed = collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
             health -= speed * 10;
         }
-    }
-
-    // hide car
-    public void HideCar()
-    {
-        GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 }
