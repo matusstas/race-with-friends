@@ -22,7 +22,7 @@ public class CarController : MonoBehaviour
     public float health = 100;
 
     public CarState carState;
-    public bool isColliding = false;
+    public bool isCollidingWithWall = false;
     public float previewForce = 0;
     public float previewAngle = 0;
 
@@ -70,8 +70,8 @@ public class CarController : MonoBehaviour
         }
         else if (carState == CarState.SELECTING_ANGLE)
         {
-            gameObject.GetComponent<Rigidbody2D>().mass=1;
-            gameObject.GetComponent<Rigidbody2D>().drag=2;
+            gameObject.GetComponent<Rigidbody2D>().mass = 1;
+            gameObject.GetComponent<Rigidbody2D>().drag = 2;
             carState = CarState.SELECTING_SPEED;
         }
         else if (carState == CarState.SELECTING_SPEED)
@@ -106,20 +106,46 @@ public class CarController : MonoBehaviour
         float direction = previewForce > 0 ? 1f : -1f;
         previewForce = Mathf.Abs(previewForce);
 
- 
+        // wait for automatic collision logic to move car outside of the collision
+        yield return null;
+        yield return null;
+        yield return null;
+        isCollidingWithWall = false; // pretend that collision isn't happening even if it is
+
         while (time < previewForce)
         {
             time += Time.deltaTime;
 
-            carRb.AddForce(transform.up * 50 * direction);
+            if (!isCollidingWithWall)
+            {
+                carRb.AddForce(transform.up * 50 * direction);
+            }
+            else   // if is colliding again, stop the car
+            {
+
+                carRb.velocity = Vector2.zero;
+                carRb.isKinematic = true;
+                carRb.angularVelocity = 0;
+                yield return null;  // wait one frame
+                carRb.isKinematic = false;
+                break;
+            }
 
             yield return null;
-        } 
+        }
 
         // wait till car stops
         // if we don't do it, current car would not collide with the next car
         while (carRb.velocity.magnitude > 0.1f)
         {
+            if (isCollidingWithWall)
+            {
+                carRb.velocity = Vector2.zero;
+                carRb.isKinematic = true;
+                carRb.angularVelocity = 0;
+                yield return null;  // wait one frame
+                carRb.isKinematic = false;
+            }
             yield return null;
         }
 
