@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6101358714943693060}
   - component: {fileID: 6101358714943693067}
-  - component: {fileID: 3562008374350755396}
   - component: {fileID: -8616769701207472694}
+  - component: {fileID: -6475068608828019024}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -129,28 +129,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!68 &3562008374350755396
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6101358714943693066}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0.01
-  m_Points:
-  - {x: -476.63046, y: -296.095}
-  - {x: -470.63046, y: -296.095}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!60 &-8616769701207472694
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -160,8 +138,8 @@ PolygonCollider2D:
   m_GameObject: {fileID: 6101358714943693066}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_Material: {fileID: 6200000, guid: 38cce1eca40b2ca44abcfa7ecb5a4d91, type: 2}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -181,3 +159,15 @@ PolygonCollider2D:
       - {x: -0.5877852, y: -0.80901706}
       - {x: 0.58778536, y: -0.80901694}
       - {x: 0.9510565, y: 0.30901712}
+--- !u!114 &-6475068608828019024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6101358714943693066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47af89c08da6f1849a7331ba0723c269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

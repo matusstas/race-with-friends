@@ -22,7 +22,7 @@ public class CarController : MonoBehaviour
     public float health = 100;
 
     public CarState carState;
-
+    public bool isColliding = false;
     public float previewForce = 0;
     public float previewAngle = 0;
 
@@ -70,6 +70,8 @@ public class CarController : MonoBehaviour
         }
         else if (carState == CarState.SELECTING_ANGLE)
         {
+            gameObject.GetComponent<Rigidbody2D>().mass=1;
+            gameObject.GetComponent<Rigidbody2D>().drag=2;
             carState = CarState.SELECTING_SPEED;
         }
         else if (carState == CarState.SELECTING_SPEED)
@@ -104,7 +106,7 @@ public class CarController : MonoBehaviour
         float direction = previewForce > 0 ? 1f : -1f;
         previewForce = Mathf.Abs(previewForce);
 
-
+ 
         while (time < previewForce)
         {
             time += Time.deltaTime;
@@ -112,7 +114,7 @@ public class CarController : MonoBehaviour
             carRb.AddForce(transform.up * 50 * direction);
 
             yield return null;
-        }
+        } 
 
         // wait till car stops
         // if we don't do it, current car would not collide with the next car
@@ -134,6 +136,13 @@ public class CarController : MonoBehaviour
     {
         Debug.Log("POUZIVAM " + boost);
         boost = null;
+    }
+
+    public void Finish()
+    {
+        Debug.Log("SOM V CILI");
+        GlobalEvents.CarDestroyed.Invoke(gameObject);
+        Destroy(gameObject);
     }
 
     // on colision with other car decrease health based on speed
