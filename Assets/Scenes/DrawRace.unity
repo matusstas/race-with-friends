@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 65549403}
   - component: {fileID: 65549404}
+  - component: {fileID: 65549405}
   m_Layer: 0
   m_Name: CopyToPlayScene
   m_TagString: Untagged
@@ -170,6 +171,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linePrefab: {fileID: 6101358714943693066, guid: 60f8ab19a5e527d4fb0a3e4e0b878532, type: 3}
   drawnPositions: []
+--- !u!114 &65549405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65549402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad93f02ccc9d6024bb285a3f746e211f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &466875412
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +247,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1075062684}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &741632531
 GameObject:
@@ -384,6 +397,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyAfterPlay: {fileID: 1075062683}
   UIRootObject: {fileID: 65549402}
+--- !u!1 &930578251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 930578252}
+  - component: {fileID: 930578254}
+  - component: {fileID: 930578253}
+  m_Layer: 5
+  m_Name: Text (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &930578252
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930578251}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1879547103}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 285, y: 188.73}
+  m_SizeDelta: {x: 209.98, y: 60.94}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &930578253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930578251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 2
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Right mouse button: rotate start/finish'
+--- !u!222 &930578254
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930578251}
+  m_CullTransparentMesh: 1
 --- !u!4 &1071938051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5956551662152403743, guid: 5afb18c40fa7e38478512c64d1c86be5, type: 3}
@@ -416,9 +508,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 466875415}
   - {fileID: 1740530840}
   - {fileID: 1879547103}
-  - {fileID: 466875415}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -461,8 +553,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -320.0001, y: 210.10986}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -285.51, y: 188.73}
+  m_SizeDelta: {x: 209.98, y: 60.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1386438886
 MonoBehaviour:
@@ -477,7 +569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -497,7 +589,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Use mouse to draw obstacles
+  m_Text: 'Left mouse button: move start/finish, draw new obstacles'
 --- !u!222 &1386438887
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -596,6 +688,7 @@ GameObject:
   - component: {fileID: 1740530840}
   - component: {fileID: 1740530839}
   - component: {fileID: 1740530838}
+  - component: {fileID: 1740530841}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -666,8 +759,24 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1075062684}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1740530841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740530837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1001 &1827830209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -757,8 +866,9 @@ RectTransform:
   m_Children:
   - {fileID: 741632532}
   - {fileID: 1386438885}
+  - {fileID: 930578252}
   m_Father: {fileID: 1075062684}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

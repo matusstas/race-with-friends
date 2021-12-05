@@ -16,4 +16,18 @@ public static class Helpers
         return position;
     }
 
+    public static GameObject GetGameObjectUnderMouse2D()
+    {
+        var mainCamera = Camera.main;
+        var mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        var hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+        if (hit.collider != null)
+        {
+            Debug.Log("GameObjectUnderMouse2D: " + hit.collider.gameObject.name);
+            return hit.collider.gameObject;
+        }
+        Debug.Log("GameObjectUnderMouse2D: " + null);
+        return null;
+    }
+
 }

@@ -6,7 +6,7 @@ public class DrawPath : MonoBehaviour
 {
     public GameObject linePrefab;
     public List<Vector2> drawnPositions;
-    GameObject line;
+    GameObject line = null;
     LineRenderer lineRenderer;
     PolygonCollider2D polygonCollider;
 
@@ -31,41 +31,48 @@ public class DrawPath : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            line = Instantiate(linePrefab, transform);
-            lineRenderer = line.GetComponent<LineRenderer>();
-            polygonCollider = line.GetComponent<PolygonCollider2D>();
+            if (Helpers.GetGameObjectUnderMouse2D() == null)
+            {
+                line = Instantiate(linePrefab, transform);
+                lineRenderer = line.GetComponent<LineRenderer>();
+                polygonCollider = line.GetComponent<PolygonCollider2D>();
+            }
         }
 
         // if mouse is pressed
         if (Input.GetMouseButton(0))
         {
-            Vector2 mousePos = getMousePosition();
-            // if last mouse position is at least 0.2 away from current mouse position
-            if (drawnPositions.Count == 0 || Vector2.Distance(drawnPositions[drawnPositions.Count - 1], mousePos) > 0.2f)
+            if (line != null)
             {
 
-                drawnPositions.Add(mousePos);
-                lineRenderer.positionCount++;
-                lineRenderer.SetPosition(lineRenderer.positionCount - 1, mousePos);
-
-                int numberOfLines = drawnPositions.Count - 1;
-                polygonCollider.pathCount = numberOfLines;
-                for (int i = 0; i < numberOfLines; i++)
+                Vector2 mousePos = getMousePosition();
+                // if last mouse position is at least 0.2 away from current mouse position
+                if (drawnPositions.Count == 0 || Vector2.Distance(drawnPositions[drawnPositions.Count - 1], mousePos) > 0.2f)
                 {
-                    // Get the two next points
-                    List<Vector2> currentPositions = new List<Vector2> { drawnPositions[i], drawnPositions[i + 1] };
-                    List<Vector2> currentColliderPoints = CalculateColliderPoints(currentPositions);
-                    polygonCollider.SetPath(i, currentColliderPoints.ConvertAll(p => (Vector2)transform.InverseTransformPoint(p)));
-                }
-            }
 
-            // transform line position to 0, 0
-            line.transform.position = Vector2.zero;
+                    drawnPositions.Add(mousePos);
+                    lineRenderer.positionCount++;
+                    lineRenderer.SetPosition(lineRenderer.positionCount - 1, mousePos);
+
+                    int numberOfLines = drawnPositions.Count - 1;
+                    polygonCollider.pathCount = numberOfLines;
+                    for (int i = 0; i < numberOfLines; i++)
+                    {
+                        // Get the two next points
+                        List<Vector2> currentPositions = new List<Vector2> { drawnPositions[i], drawnPositions[i + 1] };
+                        List<Vector2> currentColliderPoints = CalculateColliderPoints(currentPositions);
+                        polygonCollider.SetPath(i, currentColliderPoints.ConvertAll(p => (Vector2)transform.InverseTransformPoint(p)));
+                    }
+                }
+                // transform line position to 0, 0
+                line.transform.position = Vector2.zero;
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             drawnPositions.Clear();
+            line = null;
         }
     }
 
