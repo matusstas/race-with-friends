@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ba93c161fc36246be81d6c44daf80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carCount: 1
+  carCount: 2
   carTemplate: {fileID: 545319217}
 --- !u!20 &519420031
 Camera:
@@ -1715,6 +1715,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 770962626619990909, guid: b1c330a533f275c45bb1139b191b944e, type: 3}
+      propertyPath: m_Size.x
+      value: 13.908573
+      objectReference: {fileID: 0}
+    - target: {fileID: 770962626619990909, guid: b1c330a533f275c45bb1139b191b944e, type: 3}
+      propertyPath: m_Size.y
+      value: 2.0997825
+      objectReference: {fileID: 0}
+    - target: {fileID: 770962626619990909, guid: b1c330a533f275c45bb1139b191b944e, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.004509926
+      objectReference: {fileID: 0}
+    - target: {fileID: 770962626619990909, guid: b1c330a533f275c45bb1139b191b944e, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.0000017285347
+      objectReference: {fileID: 0}
     - target: {fileID: 2128946482077561957, guid: b1c330a533f275c45bb1139b191b944e, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1762,6 +1778,10 @@ PrefabInstance:
     - target: {fileID: 5245480260675600636, guid: b1c330a533f275c45bb1139b191b944e, type: 3}
       propertyPath: m_Name
       value: Level2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245480260675600636, guid: b1c330a533f275c45bb1139b191b944e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1c330a533f275c45bb1139b191b944e, type: 3}
