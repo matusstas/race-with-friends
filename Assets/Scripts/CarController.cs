@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-
 public enum CarState
 {
     NOT_SELECTED,
@@ -104,7 +103,7 @@ public class CarController : MonoBehaviour
         // move forward
         float time = 0.0f;
         float direction = previewForce > 0 ? 1f : -1f;
-        previewForce = Mathf.Abs(previewForce);
+        float absPreviewForce = Mathf.Abs(previewForce);
 
         // wait for automatic collision logic to move car outside of the collision
         yield return null;
@@ -112,7 +111,7 @@ public class CarController : MonoBehaviour
         yield return null;
         isCollidingWithWall = false; // pretend that collision isn't happening even if it is
 
-        while (time < previewForce)
+        while (time < absPreviewForce)
         {
             time += Time.deltaTime;
 
@@ -150,7 +149,6 @@ public class CarController : MonoBehaviour
         }
 
         // reset previewForce and previewAngle back to zero
-        previewForce = 0;
         previewAngle = 0;
 
         carState = CarState.NOT_SELECTED;
