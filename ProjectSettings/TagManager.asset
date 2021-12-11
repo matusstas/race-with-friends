@@ -8,6 +8,8 @@ TagManager:
   - SelectedCar
   - Undefined
   - Start
+  - InputField
+  - Level
   layers:
   - Default
   - TransparentFX

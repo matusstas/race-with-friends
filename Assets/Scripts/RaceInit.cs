@@ -4,23 +4,30 @@ using UnityEngine;
 
 public class RaceInit : MonoBehaviour
 {
-    public int carCount;
-
+    private int carCount;
     public GameObject carTemplate;
     private GameObject start;
+
+    public GameObject[] levels;
 
 
     void Awake()
     {
-        if (carCount < 1)
+        carCount = PlayerPrefs.GetInt("numberOfPlayers");
+        // Debug.Log("NC: " + carCount);
+        // Debug.Log("NCtype: " + carCount.GetType());
+
+        int levelNumber = PlayerPrefs.GetInt("level");
+        if (levelNumber != 0)
         {
-            Debug.LogError("carCount has to be greater than 0");
+            Instantiate(levels[levelNumber-1]);
         }
+        
+        // Debug.Log(GameObject.FindGameObjectWithTag("Level"));
 
         //get startline prefab
         start=GameObject.FindGameObjectWithTag("Start");
        
-
         GenerateNewCars(carCount);  // then generate the rest of the cars
 
         

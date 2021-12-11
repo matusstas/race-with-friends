@@ -4,19 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Menu : MonoBehaviour
+public class PlayMenu : MonoBehaviour
 {
-    public Button autodromBtn;
     public Button raceBtn;
-    public Button drawRaceBtn;
+    public Button autodromBtn;
 
     // Start is called before the first frame update
     void Start()
     {
         // listener to click event
-        autodromBtn.onClick.AddListener(AutodromBtnClick);
         raceBtn.onClick.AddListener(RaceBtnClick);
-        drawRaceBtn.onClick.AddListener(DrawRaceBtnClick);
+        autodromBtn.onClick.AddListener(AutodromBtnClick);
     }
 
     // Update is called once per frame
@@ -27,23 +25,16 @@ public class Menu : MonoBehaviour
 
 
     // on autodromBtn click
+    public void RaceBtnClick()
+    {
+        // load race scene
+        SceneManager.LoadScene("ChooseNumberOfPlayersScene");
+    }
+
     public void AutodromBtnClick()
     {
         // load autodrom scene
-        SceneManager.LoadScene("Autodrom");
+        SceneManager.LoadScene("AutodromScene");
     }
-
-    public void RaceBtnClick()
-    {
-        // load Race scene
-        SceneManager.LoadScene("Race");
-    }
-
-    public void DrawRaceBtnClick() {
-        SceneManager.LoadScene("DrawRace");
-    }
-
-
-
 
 }
