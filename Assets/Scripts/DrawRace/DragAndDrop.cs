@@ -19,12 +19,14 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         // get gameobject under mouse cursor from eventData and save it to itemBeingDragged
 
         itemBeingDragged = Helpers.GetGameObjectUnderMouse2D();
-        Debug.Log("itemBeingDragged: " + itemBeingDragged.name);
+        if (itemBeingDragged != null)
+        {
+            Debug.Log("itemBeingDragged: " + itemBeingDragged.name);
 
-        // get position of itemBeingDragged and save it to startPosition
-        startPosition = itemBeingDragged.transform.position;
+            // get position of itemBeingDragged and save it to startPosition
+            startPosition = itemBeingDragged.transform.position;
+        }
 
-        // GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
