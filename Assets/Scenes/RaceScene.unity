@@ -733,7 +733,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawRaceBtn: {fileID: 1315494368}
-  levelBtn: {fileID: 435925234}
+  levelBtns:
+  - {fileID: 435925234}
+  - {fileID: 1516670217}
+  - {fileID: 204292990}
 --- !u!114 &645096085
 MonoBehaviour:
   m_ObjectHideFlags: 0

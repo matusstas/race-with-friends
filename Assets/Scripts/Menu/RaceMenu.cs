@@ -7,14 +7,17 @@ using UnityEngine.UI;
 public class RaceMenu : MonoBehaviour
 {
     public Button drawRaceBtn;
-    public Button levelBtn;
+    public Button[] levelBtns;
 
     // Start is called before the first frame update
     void Start()
     {
         // listener to click event
         drawRaceBtn.onClick.AddListener(DrawRaceBtn);
-        levelBtn.onClick.AddListener(LevelBtn);
+        foreach (Button btn in levelBtns)
+        {
+                btn.onClick.AddListener(()=>LevelBtn(btn));
+        }
     }
 
     // Update is called once per frame
@@ -38,10 +41,11 @@ public class RaceMenu : MonoBehaviour
         return levelNumber;
     }
 
-    public void LevelBtn()
+    public void LevelBtn(Button btn)
     {
-        Debug.Log("level button: " + levelBtn.name);
-        int levelNumber = ExtractLevelNumberFromButtonName(levelBtn.name);
+
+        Debug.Log("level button: " + btn.name);
+        int levelNumber = ExtractLevelNumberFromButtonName(btn.name);
         PlayerPrefs.SetInt("level", levelNumber);
         // load race scene
         SceneManager.LoadScene("NewRace");
