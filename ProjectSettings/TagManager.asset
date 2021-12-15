@@ -10,6 +10,7 @@ TagManager:
   - Start
   - InputField
   - Level
+  - Slider
   layers:
   - Default
   - TransparentFX

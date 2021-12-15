@@ -17,9 +17,11 @@ public class CarController : MonoBehaviour
     private RotationPreview rotationPreview;
     private ColorPreview colorPreview;
 
+    public bool bouncy=false;
+    public float force=50f;
     public BoostAction boost = null;
     public float health = 100;
-
+    public bool shield=false;
     public CarState carState;
     public bool isCollidingWithWall = false;
     public float previewForce = 0;
@@ -70,8 +72,8 @@ public class CarController : MonoBehaviour
         }
         else if (carState == CarState.SELECTING_ANGLE)
         {
-            gameObject.GetComponent<Rigidbody2D>().mass = 1;
-            gameObject.GetComponent<Rigidbody2D>().drag = 2;
+            carRb.mass = 1;
+            carRb.drag = 2;
             carState = CarState.SELECTING_SPEED;
         }
         else if (carState == CarState.SELECTING_SPEED)
@@ -118,11 +120,11 @@ public class CarController : MonoBehaviour
 
             if (!isCollidingWithWall)
             {
-                carRb.AddForce(transform.up * 50 * direction);
+                carRb.AddForce(transform.up * force * direction);
             }
-            else   // if is colliding again, stop the car
+            else if (!bouncy)  // if is colliding again, stop the car
             {
-
+                Debug.Log("MA 1");
                 carRb.velocity = Vector2.zero;
                 carRb.isKinematic = true;
                 carRb.angularVelocity = 0;
@@ -138,8 +140,9 @@ public class CarController : MonoBehaviour
         // if we don't do it, current car would not collide with the next car
         while (carRb.velocity.magnitude > 0.1f)
         {
-            if (isCollidingWithWall)
+            if (isCollidingWithWall && !bouncy)
             {
+                Debug.Log("MA 2");
                 carRb.velocity = Vector2.zero;
                 carRb.isKinematic = true;
                 carRb.angularVelocity = 0;
@@ -160,6 +163,7 @@ public class CarController : MonoBehaviour
     public void UseBoost()
     {
         Debug.Log("POUZIVAM " + boost);
+        boost.UseBoost(gameObject);
         boost = null;
     }
 
@@ -177,8 +181,13 @@ public class CarController : MonoBehaviour
         {
             GameObject movingCar=collision.gameObject;
             float speed = movingCar.GetComponent<Rigidbody2D>().velocity.magnitude;
-            if (teamId != movingCar.GetComponent<CarController>().teamId)
+            if (!shield && teamId != movingCar.GetComponent<CarController>().teamId)
                 health -= speed * 10;
+        }
+
+        else if (bouncy){
+
+            //carRb.velocity = Vector3.Reflect(carRb.velocity, collision.contacts[0].normal);
         }
     }
 }

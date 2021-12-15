@@ -7,7 +7,7 @@ public class SliderController : MonoBehaviour
 {
     public Slider slider;
     public bool isRunning = true;
-    public float defaultSpeed = 0.01f;
+    
     public float speed = 0.01f;
     public int direction = 1;
 

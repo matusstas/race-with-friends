@@ -18,7 +18,6 @@ public class AutodromInit : MonoBehaviour
         }
         GenerateNewCars(carCount);  // then generate the rest of the cars
 
-        // add "SelectedCar" tag to the first car
         GameObject firstCar = GameObject.FindGameObjectsWithTag("Car")[0];
     }
 
@@ -42,7 +41,7 @@ public class AutodromInit : MonoBehaviour
         {
             // get random 2d position that isn't too close to other objects
             Vector2 randomPosition = Helpers.GetRandomPosition(2f);
-            
+
             // random rotation
             float randomRotation = Random.Range(0, 360);
 

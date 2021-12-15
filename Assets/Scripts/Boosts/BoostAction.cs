@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class BoostAction : MonoBehaviour
 {
-    public abstract void UseBoost();
+    public abstract void UseBoost(GameObject car);
 }
