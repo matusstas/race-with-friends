@@ -667,7 +667,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0
   far clip plane: 1000
   field of view: 0.00001
   orthographic: 1
@@ -713,7 +713,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b6b7c09cae6104290da2b1328a9b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carCount: 5
   carTemplate: {fileID: 545319217}
 --- !u!114 &519420034
 MonoBehaviour:
@@ -780,11 +779,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8058020942556772749, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.8479
+      value: -12.22
       objectReference: {fileID: 0}
     - target: {fileID: 8058020942556772749, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0759
+      value: -3.94
       objectReference: {fileID: 0}
     - target: {fileID: 8058020942556772749, guid: 58210754f8987917ca387a6fb63417b8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1833,7 +1832,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 0
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0

@@ -42,7 +42,7 @@ public class AutodromInit : MonoBehaviour
         {
             // get random 2d position that isn't too close to other objects
             Vector2 randomPosition = Helpers.GetRandomPosition(2f);
-
+            
             // random rotation
             float randomRotation = Random.Range(0, 360);
 

@@ -54,10 +54,11 @@ public class RaceInit : MonoBehaviour
             // get random 2d position that isn't too close to other objects
             //Vector2 randomPosition = Helpers.GetRandomPosition(2f);
 
-            Vector2 startPosition=start.transform.position;  
+            Vector3 startPosition=start.transform.position;  
 
             //
             startPosition.y-=carTemplate.transform.localScale.x*2;  
+            startPosition.z=-1;
                     
             // random rotation
             Quaternion startRotation = start.transform.rotation;
