@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class AutodromInit : MonoBehaviour
 {
-    public int carCount;
+    private int carCount;
 
     public GameObject carTemplate;
 
 
     void Awake()
     {
+        carCount = PlayerPrefs.GetInt("numberOfPlayers");
         if (carCount < 1)
         {
             Debug.LogError("carCount has to be greater than 0");
@@ -50,9 +51,22 @@ public class AutodromInit : MonoBehaviour
 
             newCar.tag = "Car";
             newCar.GetComponent<CarController>().name = "Car" + i;
+            //set mode
+            string mode=PlayerPrefs.GetString("mode");
+            if(mode=="all")
+            {
+                newCar.GetComponent<CarController>().teamId = i;
+                newCar.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+            }
+                
+            else
+            {
+                newCar.GetComponent<CarController>().teamId = i%2;
+                newCar.GetComponent<SpriteRenderer>().color = new Color(i%2,0,1);
+            }
 
             // set car color to random color
-            newCar.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+            
         }
 
         Debug.Log("Generated " + count + " cars");

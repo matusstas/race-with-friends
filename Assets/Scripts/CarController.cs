@@ -24,6 +24,7 @@ public class CarController : MonoBehaviour
     public bool isCollidingWithWall = false;
     public float previewForce = 0;
     public float previewAngle = 0;
+    public int teamId=0;
 
     // Start is called before the first frame update
     void Start()
@@ -174,8 +175,10 @@ public class CarController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Car")
         {
-            float speed = collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
-            health -= speed * 10;
+            GameObject movingCar=collision.gameObject;
+            float speed = movingCar.GetComponent<Rigidbody2D>().velocity.magnitude;
+            if (teamId != movingCar.GetComponent<CarController>().teamId)
+                health -= speed * 10;
         }
     }
 }
