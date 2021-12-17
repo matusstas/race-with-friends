@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayDrawnRace : MonoBehaviour
 {
-    public GameObject DestroyAfterPlay;
+    public GameObject[] DestroyAfterPlay;
     public GameObject UIRootObject;
     private AsyncOperation sceneAsync;
 
@@ -21,8 +21,22 @@ public class PlayDrawnRace : MonoBehaviour
 
     public void Play()
     {
-        // delete DestroyAfterPlay
-        Destroy(DestroyAfterPlay);
+        // destroy all objects that should be destroyed after play
+        foreach (GameObject obj in DestroyAfterPlay)
+        {
+            Destroy(obj);
+        }
+
+        // loop all GameObjects in the scene and if they have a CopyObject, destroy them
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            Debug.Log("obj: " + obj.name);
+            if (obj.GetComponent<CopyObject>() != null)
+            {
+                Destroy(obj);
+            }
+        }
 
         // load new scene without destroying current one
         Application.LoadLevelAdditive("NewRace");
