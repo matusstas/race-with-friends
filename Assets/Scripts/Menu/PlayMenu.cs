@@ -31,12 +31,14 @@ public class PlayMenu : MonoBehaviour
     {
         // load race scene
         SceneManager.LoadScene("ChooseNumberOfPlayersScene");
+        PlayerPrefs.SetString("gameMode","race");
     }
 
     public void AutodromBtnClick()
     {
         // load autodrom scene
         SceneManager.LoadScene("AutodromScene");
+        PlayerPrefs.SetString("gameMode","autodrom");
     }
 
     public void BackBtnClick()

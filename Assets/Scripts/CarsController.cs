@@ -39,6 +39,11 @@ public class CarsController : MonoBehaviour
     void Start()
     {
         cars = new List<GameObject>(GameObject.FindGameObjectsWithTag("Car"));
+        if (PlayerPrefs.GetString("gameMode")=="race")
+            for (int i = 1; i < cars.Count; i++)
+            {
+                cars[i].active=false;
+            }
         SelectNextCar();
     }
 
@@ -98,6 +103,8 @@ public class CarsController : MonoBehaviour
             selectedCarIndex = 0;
         }
         selectedCar = cars[selectedCarIndex];
+        if (!selectedCar.active)
+            selectedCar.active=true;
 
         selectedCar.GetComponent<CarController>().NextState();
     }
