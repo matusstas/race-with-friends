@@ -15,6 +15,10 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
     public InputField inputField;
     public Button backBtn;
 
+    // min and max number of players (included)
+    public int minPlayers = 2;
+    public int maxPlayers = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +44,7 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
         if (regex.IsMatch(inputFieldText))
         {
             int numberOfPlayers = int.Parse(inputFieldText);
-            if (numberOfPlayers >= 1 && numberOfPlayers <= 10)
+            if (numberOfPlayers >= minPlayers && numberOfPlayers <= maxPlayers)
             {
                 return true;
             } else
