@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GuiController : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class GuiController : MonoBehaviour
     public Text healthText;
     public Text winnerText;
 
+    public Button backBtn;
+
     // subscribe to events
     void Awake()
     {
@@ -28,6 +31,8 @@ public class GuiController : MonoBehaviour
         GlobalEvents.CarStateChanged.AddListener(CarStateChanged);
         GlobalEvents.CarDestroyed.AddListener(CheckWinCondition);
 
+        // back button
+        backBtn.onClick.AddListener(BackBtnClick);
     }
 
     // onDestroy unsubscribe from events
@@ -122,5 +127,10 @@ public class GuiController : MonoBehaviour
             winnerText.text = "No one won!";
             Time.timeScale = 0;
         }
+    }
+
+    private void BackBtnClick()
+    {
+        SceneManager.LoadScene("PlayScene");
     }
 }

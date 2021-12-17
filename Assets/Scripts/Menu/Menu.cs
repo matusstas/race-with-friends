@@ -8,6 +8,7 @@ public class Menu : MonoBehaviour
 {
     public Button playBtn;
     public Button controlsBtn;
+    public Button exitGameBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,7 @@ public class Menu : MonoBehaviour
         // listener to click event
         playBtn.onClick.AddListener(PlayBtnClick);
         controlsBtn.onClick.AddListener(ControlsBtnClick);
+        exitGameBtn.onClick.AddListener(ExitGameBtnClick);
     }
 
     // Update is called once per frame
@@ -33,6 +35,13 @@ public class Menu : MonoBehaviour
     {
         // load controls scene
         SceneManager.LoadScene("ControlsScene");
+    }
+
+    public void ExitGameBtnClick()
+    {
+        Debug.Log("Exit game button clicked");
+        // exit game
+        Application.Quit();
     }
 
 }

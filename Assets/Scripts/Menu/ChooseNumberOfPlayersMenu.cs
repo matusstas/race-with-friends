@@ -11,6 +11,7 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
 
     public GameObject gameObjectInputField;
     public InputField inputField;
+    public Button backBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,9 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
 
         // listener to click event
         confirmBtn.onClick.AddListener(ConfirmBtnClick);
+        backBtn.onClick.AddListener(BackBtnClick);
+
+        inputField.text = PlayerPrefs.GetInt("numberOfPlayers", 2).ToString();
     }
 
     // Update is called once per frame
@@ -45,5 +49,11 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
         } else {
             Debug.Log("InputField: wrong number");
         }
+    }
+
+    public void BackBtnClick()
+    {
+        // load main menu scene
+        SceneManager.LoadScene("PlayScene");
     }
 }

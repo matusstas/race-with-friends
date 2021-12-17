@@ -9,6 +9,8 @@ public class RaceMenu : MonoBehaviour
     public Button drawRaceBtn;
     public Button[] levelBtns;
 
+    public Button backBtn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,8 @@ public class RaceMenu : MonoBehaviour
         {
                 btn.onClick.AddListener(()=>LevelBtn(btn));
         }
+
+        backBtn.onClick.AddListener(BackBtnClick);
     }
 
     // Update is called once per frame
@@ -49,5 +53,11 @@ public class RaceMenu : MonoBehaviour
         PlayerPrefs.SetInt("level", levelNumber);
         // load race scene
         SceneManager.LoadScene("NewRace");
+    }
+    
+    public void BackBtnClick()
+    {
+        // load main menu scene
+        SceneManager.LoadScene("ChooseNumberOfPlayersScene");
     }
 }

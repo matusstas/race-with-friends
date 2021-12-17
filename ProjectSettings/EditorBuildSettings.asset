@@ -8,4 +8,43 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/AutodromMenu.unity
+    guid: b232ab018e37d514789d604774ef75ab
+  - enabled: 1
+    path: Assets/Scenes/AutodromScene.unity
+    guid: 132a67b99aa390d428ff5f98a5d5f93a
+  - enabled: 1
+    path: Assets/Scenes/ChooseNumberOfPlayersScene.unity
+    guid: aea78408f3be15cc287b728354acb0d9
+  - enabled: 1
+    path: Assets/Scenes/ControlsScene.unity
+    guid: 953a0b44acb2c8fc0991a40bc4784dec
+  - enabled: 1
+    path: Assets/Scenes/DrawRaceScene.unity
+    guid: 7d1a2097fc9a28b429e80a83a52e7959
+  - enabled: 1
+    path: Assets/Scenes/Level1Scene.unity
+    guid: abf6a5e30e83ba34ba13949bd1e411a0
+  - enabled: 1
+    path: Assets/Scenes/Level2Scene.unity
+    guid: 358ac7b21b51767909674100d8165ebc
+  - enabled: 1
+    path: Assets/Scenes/Level3Scene.unity
+    guid: d90c9bcb355e5f886b1bf75bae7b73e1
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 4cf2e4c1c1010584abdb5d7a6a8a98a3
+  - enabled: 1
+    path: Assets/Scenes/NewRace.unity
+    guid: 7ced4340740658d4193a050e3c92bf3f
+  - enabled: 1
+    path: Assets/Scenes/PlayScene.unity
+    guid: da4ddacdcdcd3af138cc00bb0eb1b23f
+  - enabled: 1
+    path: Assets/Scenes/Race.unity
+    guid: 9c94ac1efe0bd524eaae8051c5aa5740
+  - enabled: 1
+    path: Assets/Scenes/RaceScene.unity
+    guid: dae9af876f891accbb57fa924fcf5808
   m_configObjects: {}
