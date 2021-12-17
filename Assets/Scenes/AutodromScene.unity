@@ -502,6 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carsController: {fileID: 519420035}
+  guiController: {fileID: 1634602201}
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0

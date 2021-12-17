@@ -18,6 +18,7 @@ public class GuiController : MonoBehaviour
     public Text winnerText;
 
     public Button backBtn;
+    private GameObject boost;
 
     // subscribe to events
     void Awake()
@@ -30,6 +31,8 @@ public class GuiController : MonoBehaviour
         // add listener
         GlobalEvents.CarStateChanged.AddListener(CarStateChanged);
         GlobalEvents.CarDestroyed.AddListener(CheckWinCondition);
+        GlobalEvents.CarTurnEnd.AddListener(ShowBoost);
+        
 
         // back button
         backBtn.onClick.AddListener(BackBtnClick);
@@ -41,6 +44,7 @@ public class GuiController : MonoBehaviour
         // remove listener
         GlobalEvents.CarStateChanged.RemoveListener(CarStateChanged);
         GlobalEvents.CarDestroyed.RemoveListener(CheckWinCondition);
+        GlobalEvents.CarTurnEnd.RemoveListener(ShowBoost);
 
     }
 
@@ -48,7 +52,11 @@ public class GuiController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        CarController selectedCar = carsController.selectedCar.GetComponent<CarController>();
+        if (selectedCar.boost){
+            boost=(GameObject)Instantiate(selectedCar.boost.gameObject, new Vector3(8,-4,0), Quaternion.identity);
+            
+        }
     }
 
     // Update is called once per frame
@@ -118,15 +126,33 @@ public class GuiController : MonoBehaviour
 
             // set winnerText to winning car
             winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
 
         // or if no one is left
         if (carCount == 0)
         {
             winnerText.text = "No one won!";
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
+    }
+
+    private void ShowBoost()
+    {
+        Debug.Log("BOOST");
+        
+        Destroy(boost);
+        CarController selectedCar = carsController.selectedCar.GetComponent<CarController>();
+        Debug.Log(selectedCar.boost);
+        if (selectedCar.boost){
+            boost=(GameObject)Instantiate(selectedCar.boost.gameObject, new Vector3(8,-4,0), Quaternion.identity);
+            boost.active=true;
+        }
+    }
+
+    public void HideBoost()
+    {
+        Destroy(boost);
     }
 
     private void BackBtnClick()

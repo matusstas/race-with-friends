@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class KeyboardController : MonoBehaviour
 {
     public CarsController carsController;
+    public GuiController guiController;
 
 
     // Start is called before the first frame update
@@ -26,6 +27,8 @@ public class KeyboardController : MonoBehaviour
         if (Input.GetKeyDown("enter") || Input.GetKeyDown("return"))
         {
             carsController?.selectedCar.GetComponent<CarController>().UseBoost();
+            guiController?.HideBoost();
+
         }
     }
 }
