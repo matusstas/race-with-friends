@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
+
 
 public class ChooseNumberOfPlayersMenu : MonoBehaviour
 {
@@ -32,18 +34,33 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
         
     }
 
-    bool ValidateInputField()
+    bool ValidateInputField(string inputFieldText)
     {
-        PlayerPrefs.SetInt("numberOfPlayers", int.Parse(inputField.text));
-        return true;
+        Regex regex = new Regex(@"^\d+$");
+        if (regex.IsMatch(inputFieldText))
+        {
+            int numberOfPlayers = int.Parse(inputFieldText);
+            if (numberOfPlayers >= 1 && numberOfPlayers <= 10)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        } else
+        {
+            return false;
+        }
     }
 
 
     // on autodromBtn click
     public void ConfirmBtnClick()
     {
-        if (ValidateInputField())
+        if (ValidateInputField(inputField.text))
         {
+            int numberOfPlayers = int.Parse(inputField.text);
+            PlayerPrefs.SetInt("numberOfPlayers", numberOfPlayers);
             // load race scene
             SceneManager.LoadScene("RaceScene");
         } else {
