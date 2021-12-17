@@ -62,7 +62,9 @@ public class GuiController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateCarHealthGUI();
+        if (PlayerPrefs.GetString("gameMode")=="autodrom") {
+            UpdateCarHealthGUI();
+        }
         UpdateSlidersGUI();
     }
 
