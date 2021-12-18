@@ -12,7 +12,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     Transform startParent;
 
 
-
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("OnBeginDrag");
@@ -36,6 +35,17 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             Debug.Log("OnDrag");
             // mouse position to world position
             Vector2 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // newPosition.x = Mathf.Clamp(newPosition.x, -9.5f, 9.5f);
+            
+            if (itemBeingDragged.tag == "Start" || itemBeingDragged.tag == "Finish")
+            {
+                float minX = -7.5f;
+                float maxX = +7.5f;
+                float minY = -3.5f;
+                float maxY = +3.5f;
+                newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+                newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+            }
 
             itemBeingDragged.transform.position = newPosition;
         }
