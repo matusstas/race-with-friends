@@ -139,6 +139,14 @@ public class GuiController : MonoBehaviour
                 winnerText.text = "No one won!";
                 //Time.timeScale = 0;
             }
+        } else 
+        {
+            int originalCarCount = PlayerPrefs.GetInt("numberOfPlayers");
+            if (originalCarCount - carCount == 1)
+            {
+                GameObject winner = carToBeDestroyed;
+                winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
+            }
         }
     }
 

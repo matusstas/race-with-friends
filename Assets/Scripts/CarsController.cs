@@ -104,21 +104,24 @@ public class CarsController : MonoBehaviour
 
     public void SelectNextCar()
     {
-        // select next car
-        selectedCarIndex++;
-        if (selectedCarIndex >= cars.Count)
+        if (cars.Count > 0)
         {
-            selectedCarIndex = 0;
+            // select next car
+            selectedCarIndex++;
+            if (selectedCarIndex >= cars.Count)
+            {
+                selectedCarIndex = 0;
+            }
+
+            selectedCar = cars[selectedCarIndex];
+            selectedCarNumber = carNumbers[selectedCarIndex];
+
+            if (!selectedCar.active)
+                selectedCar.active=true;
+                selectedCarNumber.active=true;
+
+            selectedCar.GetComponent<CarController>().NextState();
         }
-
-        selectedCar = cars[selectedCarIndex];
-        selectedCarNumber = carNumbers[selectedCarIndex];
-
-        if (!selectedCar.active)
-            selectedCar.active=true;
-            selectedCarNumber.active=true;
-
-        selectedCar.GetComponent<CarController>().NextState();
     }
 }
 
