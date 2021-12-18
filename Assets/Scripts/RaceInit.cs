@@ -6,6 +6,8 @@ public class RaceInit : MonoBehaviour
 {
     private int carCount;
     public GameObject carTemplate;
+    public GameObject carNumberTemplate;
+
     private GameObject start;
 
     public GameObject[] levels;
@@ -30,7 +32,7 @@ public class RaceInit : MonoBehaviour
        
         GenerateNewCars(carCount);  // then generate the rest of the cars
 
-        
+        Debug.Log("XXX");
     }
 
     // Start is called before the first frame update
@@ -54,21 +56,28 @@ public class RaceInit : MonoBehaviour
             // get random 2d position that isn't too close to other objects
             //Vector2 randomPosition = Helpers.GetRandomPosition(2f);
 
-            Vector3 startPosition=start.transform.position;  
+            Vector3 startCarPosition=start.transform.position;  
 
             //
-            startPosition.y-=carTemplate.transform.localScale.x*2;  
-            startPosition.z=-1;
+            startCarPosition.y-=carTemplate.transform.localScale.x*2;  
+            startCarPosition.z=-1;
                     
             // random rotation
             Quaternion startRotation = start.transform.rotation;
 
-            // create new car
-            GameObject newCar = Instantiate(carTemplate, startPosition, startRotation);
+            // create new car number
+            GameObject newCarNumber = Instantiate(carNumberTemplate, startCarPosition, startRotation);
+            newCarNumber.tag = "CarNumber";
+            newCarNumber.GetComponent<TextMesh>().text = i.ToString();
 
+            // create new car
+            GameObject newCar = Instantiate(carTemplate, startCarPosition, startRotation);
+            
             newCar.tag = "Car";
             newCar.GetComponent<CarController>().name = "Car" + i;
-
+            newCar.GetComponent<CarController>().carNumberTemplate = newCarNumber;
+            
+            
             // set car color to random color
             newCar.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         }

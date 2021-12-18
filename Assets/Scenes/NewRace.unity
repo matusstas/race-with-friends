@@ -588,6 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carTemplate: {fileID: 8519429719291867351, guid: 1db75d20220b347479efab2b187693e3, type: 3}
+  carNumberTemplate: {fileID: 7402864341134010100, guid: 45487919e3f7dc52b9c3fb62339910fd, type: 3}
   levels:
   - {fileID: 5021562889626007218, guid: bcc5451d245ffd949a4b4a62aa70ae8c, type: 3}
   - {fileID: 5245480260675600636, guid: b1c330a533f275c45bb1139b191b944e, type: 3}

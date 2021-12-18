@@ -7,6 +7,7 @@ public class AutodromInit : MonoBehaviour
     private int carCount;
 
     public GameObject carTemplate;
+    public GameObject carNumberTemplate;
 
 
     void Awake()
@@ -45,11 +46,19 @@ public class AutodromInit : MonoBehaviour
             // random rotation
             float randomRotation = Random.Range(0, 360);
 
+
+            // create new car number
+            GameObject newCarNumber = Instantiate(carNumberTemplate, randomPosition, Quaternion.Euler(0, 0, randomRotation));
+            newCarNumber.tag = "CarNumber";
+            newCarNumber.GetComponent<TextMesh>().text = i.ToString();
+
             // create new car
             GameObject newCar = Instantiate(carTemplate, randomPosition, Quaternion.Euler(0, 0, randomRotation));
 
             newCar.tag = "Car";
             newCar.GetComponent<CarController>().name = "Car" + i;
+            newCar.GetComponent<CarController>().carNumberTemplate = newCarNumber;
+
             //set mode
             string mode=PlayerPrefs.GetString("mode");
             if(mode=="all")
@@ -70,8 +79,19 @@ public class AutodromInit : MonoBehaviour
 
         Debug.Log("Generated " + count + " cars");
     }
-
-
-
-
 }
+
+
+            // // create new car number
+            // GameObject newCarNumber = Instantiate(carNumberTemplate, startCarPosition, startRotation);
+            // newCarNumber.tag = "CarNumber";
+            // newCarNumber.GetComponent<TextMesh>().text = i.ToString();
+
+            // // create new car
+            // GameObject newCar = Instantiate(carTemplate, startCarPosition, startRotation);
+            
+            // newCar.tag = "Car";
+            // newCar.GetComponent<CarController>().name = "Car" + i;
+            // newCar.GetComponent<CarController>().carNumberTemplate = newCarNumber;
+            
+            

@@ -13,6 +13,7 @@ public enum CarState
 
 public class CarController : MonoBehaviour
 {
+    public GameObject carNumberTemplate;
     private Rigidbody2D carRb;
     private RotationPreview rotationPreview;
     private ColorPreview colorPreview;
@@ -57,6 +58,9 @@ public class CarController : MonoBehaviour
         {
             // wait for animation to finish
         }
+
+        carNumberTemplate.transform.position = transform.position;
+        carNumberTemplate.transform.rotation = transform.rotation;
     }
 
     public void NextState()

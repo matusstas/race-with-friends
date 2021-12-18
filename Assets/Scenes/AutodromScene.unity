@@ -489,6 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carTemplate: {fileID: 8519429719291867351, guid: 1db75d20220b347479efab2b187693e3, type: 3}
+  carNumberTemplate: {fileID: 7402864341134010100, guid: 45487919e3f7dc52b9c3fb62339910fd, type: 3}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +517,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cars: []
+  carNumbers: []
   selectedCar: {fileID: 0}
+  selectedCarNumber: {fileID: 0}
 --- !u!1 &546442574
 GameObject:
   m_ObjectHideFlags: 0
