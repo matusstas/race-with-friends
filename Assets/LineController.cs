@@ -23,6 +23,11 @@ public class LineController : MonoBehaviour
             // set is coliding to true
             CarController carController = car.gameObject.GetComponent<CarController>();
             carController.isCollidingWithWall = true;
+        // if (carController.bouncy==true)
+        //     {
+        //         carController.bouncy=false;
+        //         carController.GetComponent<CapsuleCollider2D>().sharedMaterial=null;
+        //     }
 
             // CarController carController = car.gameObject.GetComponent<CarController>();
 
