@@ -590,9 +590,9 @@ MonoBehaviour:
   carTemplate: {fileID: 8519429719291867351, guid: 1db75d20220b347479efab2b187693e3, type: 3}
   carNumberTemplate: {fileID: 7402864341134010100, guid: 45487919e3f7dc52b9c3fb62339910fd, type: 3}
   levels:
-  - {fileID: 5021562889626007218, guid: bcc5451d245ffd949a4b4a62aa70ae8c, type: 3}
-  - {fileID: 5245480260675600636, guid: b1c330a533f275c45bb1139b191b944e, type: 3}
-  - {fileID: 8524357152317284807, guid: d6a462587d1d111fa827d89c16266f9e, type: 3}
+  - {fileID: 7841429405263483571, guid: c0d760e5c6cc21846b84a63a525fffa6, type: 3}
+  - {fileID: 1066687068811369623, guid: 62fa10d3e908cba40ba09228d0b61031, type: 3}
+  - {fileID: 987503837323468400, guid: fb0f66c857ea42b408ddcdb0e75278ee, type: 3}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -677,7 +677,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cars: []
+  carNumbers: []
   selectedCar: {fileID: 0}
+  selectedCarNumber: {fileID: 0}
 --- !u!1001 &732963026
 PrefabInstance:
   m_ObjectHideFlags: 0
