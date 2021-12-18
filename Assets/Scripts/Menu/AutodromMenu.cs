@@ -8,6 +8,7 @@ public class AutodromMenu : MonoBehaviour
 {
     public Button allBtn;
     public Button teamBtn;
+    public Button backBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,7 @@ public class AutodromMenu : MonoBehaviour
         // listener to click event
         allBtn.onClick.AddListener(AllBtnClick);
         teamBtn.onClick.AddListener(TeamBtnClick);
+        backBtn.onClick.AddListener(BackBtnClick);
     }
 
     // Update is called once per frame
@@ -37,6 +39,12 @@ public class AutodromMenu : MonoBehaviour
         // load autodrom scene
          PlayerPrefs.SetString("mode", "team");
         SceneManager.LoadScene("AutodromScene");
+    }
+
+    public void BackBtnClick()
+    {
+        // load play scene
+        SceneManager.LoadScene("PlayScene");
     }
 
 }

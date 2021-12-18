@@ -261,6 +261,8 @@ MonoBehaviour:
   gameObjectInputField: {fileID: 0}
   inputField: {fileID: 0}
   backBtn: {fileID: 0}
+  minPlayers: 2
+  maxPlayers: 10
 --- !u!1 &458189500
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +301,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 227.3426, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &458189502
 MonoBehaviour:
@@ -868,6 +870,8 @@ MonoBehaviour:
   gameObjectInputField: {fileID: 0}
   inputField: {fileID: 0}
   backBtn: {fileID: 519869516}
+  minPlayers: 2
+  maxPlayers: 10
 --- !u!114 &1430609848
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,7 +28,8 @@ public class Menu : MonoBehaviour
     public void PlayBtnClick()
     {
         // load play scene
-        SceneManager.LoadScene("PlayScene");
+        // SceneManager.LoadScene("PlayScene");
+        SceneManager.LoadScene("ChooseNumberOfPlayersScene");
     }
 
     public void ControlsBtnClick()

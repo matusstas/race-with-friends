@@ -30,20 +30,22 @@ public class PlayMenu : MonoBehaviour
     public void RaceBtnClick()
     {
         // load race scene
-        SceneManager.LoadScene("ChooseNumberOfPlayersScene");
+        // SceneManager.LoadScene("ChooseNumberOfPlayersScene");
+        SceneManager.LoadScene("RaceScene"); 
         PlayerPrefs.SetString("gameMode","race");
     }
 
     public void AutodromBtnClick()
     {
         // load autodrom scene
-        SceneManager.LoadScene("AutodromScene");
+        SceneManager.LoadScene("AutodromMenuScene");
         PlayerPrefs.SetString("gameMode","autodrom");
     }
 
     public void BackBtnClick()
     {
         // load main menu scene
-        SceneManager.LoadScene("MainMenu");
+        // SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("ChooseNumberOfPlayersScene");
     }
 }

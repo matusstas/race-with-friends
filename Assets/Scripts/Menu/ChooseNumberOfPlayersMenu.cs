@@ -29,7 +29,8 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
         confirmBtn.onClick.AddListener(ConfirmBtnClick);
         backBtn.onClick.AddListener(BackBtnClick);
 
-        inputField.text = PlayerPrefs.GetInt("numberOfPlayers", 2).ToString();
+        // inputField.text = PlayerPrefs.GetInt("numberOfPlayers", 2).ToString();
+        inputField.text = "";
     }
 
     // Update is called once per frame
@@ -66,7 +67,8 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
             int numberOfPlayers = int.Parse(inputField.text);
             PlayerPrefs.SetInt("numberOfPlayers", numberOfPlayers);
             // load race scene
-            SceneManager.LoadScene("RaceScene");
+            // SceneManager.LoadScene("RaceScene");
+            SceneManager.LoadScene("PlayScene");
         } else {
             Debug.Log("InputField: wrong number");
         }
@@ -75,6 +77,7 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
     public void BackBtnClick()
     {
         // load main menu scene
-        SceneManager.LoadScene("PlayScene");
+        // SceneManager.LoadScene("PlayScene");
+        SceneManager.LoadScene("MainMenu");
     }
 }
