@@ -43,6 +43,7 @@ public class CarController : MonoBehaviour
         {
             GlobalEvents.CarDestroyed.Invoke(gameObject);
             Destroy(gameObject);
+            Destroy(gameObject.GetComponent<CarController>().carNumberTemplate);
         }
         if (carState == CarState.SELECTING_ANGLE)
         {
@@ -176,6 +177,7 @@ public class CarController : MonoBehaviour
         Debug.Log("SOM V CILI");
         GlobalEvents.CarDestroyed.Invoke(gameObject);
         Destroy(gameObject);
+        Destroy(gameObject.GetComponent<CarController>().carNumberTemplate);
     }
 
     // on colision with other car decrease health based on speed
