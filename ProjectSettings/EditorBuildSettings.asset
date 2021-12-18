@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ChooseNumberOfPlayersScene.unity
     guid: aea78408f3be15cc287b728354acb0d9
   - enabled: 1
-    path: Assets/Scenes/ControlsScene.unity
+    path: Assets/Prefabs/ControlsScene.unity
     guid: 953a0b44acb2c8fc0991a40bc4784dec
   - enabled: 1
     path: Assets/Scenes/DrawRaceScene.unity

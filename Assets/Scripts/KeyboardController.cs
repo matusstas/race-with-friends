@@ -36,8 +36,9 @@ public class KeyboardController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("h pressed");
-            PlayerPrefs.SetInt("isHPressed", 1);
-            SceneManager.LoadScene("ControlsScene");
+            guiController?.ShowControlls();
+            //PlayerPrefs.SetInt("isHPressed", 1);
+            //SceneManager.LoadScene("ControlsScene");
         }
     }
 }

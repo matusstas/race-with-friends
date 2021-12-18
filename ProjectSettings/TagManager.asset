@@ -12,6 +12,7 @@ TagManager:
   - Level
   - Slider
   - CarNumber
+  - Controlls
   layers:
   - Default
   - TransparentFX

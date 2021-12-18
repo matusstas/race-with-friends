@@ -14,6 +14,7 @@ public class GuiController : MonoBehaviour
     private SliderController sliderAngleController;
 
 
+    private GameObject controlls;
     public Text healthText;
     public Text winnerText;
 
@@ -57,6 +58,8 @@ public class GuiController : MonoBehaviour
             boost=(GameObject)Instantiate(selectedCar.boost.gameObject, new Vector3(8,-4,0), Quaternion.identity);
             
         }
+        controlls=GameObject.FindGameObjectWithTag("Controlls");
+        controlls.SetActive(false);
     }
 
     // Update is called once per frame
@@ -171,5 +174,18 @@ public class GuiController : MonoBehaviour
     private void BackBtnClick()
     {
         SceneManager.LoadScene("PlayScene");
+    }
+
+
+    public void ShowControlls()
+    {
+        if (controlls.activeSelf==true)
+            {
+                controlls.SetActive(false);
+            }
+        else
+        {
+            controlls.SetActive(true);
+        }
     }
 }
