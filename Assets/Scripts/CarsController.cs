@@ -120,9 +120,25 @@ public class CarsController : MonoBehaviour
             if (!selectedCar.active)
                 selectedCar.active=true;
                 selectedCarNumber.active=true;
-
-            selectedCar.GetComponent<CarController>().NextState();
+            
+            Rigidbody2D carRb=selectedCar.GetComponent<Rigidbody2D>();
+            
+            StartCoroutine(CheckAnimating(carRb));
+            Debug.Log("AFTERCOROUTINE");
+            
         }
+    }
+
+    public IEnumerator CheckAnimating(Rigidbody2D carRb){
+        Debug.Log("COROUTINE");
+        while (carRb.velocity.magnitude > 0.1f)
+            {
+                Debug.Log("SLIDING");
+                yield return null;
+            }
+        Debug.Log("After WHILE");
+        selectedCar.GetComponent<CarController>().NextState();
+        yield return null;
     }
 }
 
