@@ -62,9 +62,7 @@ public class GuiController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerPrefs.GetString("gameMode")=="autodrom") {
-            UpdateCarHealthGUI();
-        }
+        UpdateCarHealthGUI();
         UpdateSlidersGUI();
     }
 
@@ -85,7 +83,6 @@ public class GuiController : MonoBehaviour
         UpdateSlidersGUI();
         if (carState == CarState.SELECTING_ANGLE)  // at the start it is null
         {
-
             sliderForceController.Pause();
             sliderAngleController.Continue();
         }
@@ -103,39 +100,45 @@ public class GuiController : MonoBehaviour
 
     private void UpdateCarHealthGUI()
     {
-        // update car health in gui
-        string hText = "Health:\n";
-        foreach (GameObject car in carsController.cars)
+        if (PlayerPrefs.GetString("gameMode")=="autodrom")
         {
-            if (car != null)
+            // update car health in gui
+            string hText = "Health:\n";
+            foreach (GameObject car in carsController.cars)
             {
-                // get hex color of car and add it to <color> tag
-                hText += "<color=#" + ColorUtility.ToHtmlStringRGB(car.GetComponent<SpriteRenderer>().color) + ">" + car.GetComponent<CarController>().name + "</color> " + Mathf.Round(car.GetComponent<CarController>().health) + "\n";
+                if (car != null)
+                {
+                    // get hex color of car and add it to <color> tag
+                    hText += "<color=#" + ColorUtility.ToHtmlStringRGB(car.GetComponent<SpriteRenderer>().color) + ">" + car.GetComponent<CarController>().name + "</color> " + Mathf.Round(car.GetComponent<CarController>().health) + "\n";
+                }
             }
+            healthText.text = hText + "";
         }
-        healthText.text = hText + "";
     }
 
 
     private void CheckWinCondition(GameObject carToBeDestroyed)
     {
         int carCount = carsController.cars.Count;
-        // pause the game if only one car is left
-        if (carCount == 1)
+        if (PlayerPrefs.GetString("gameMode")=="autodrom")
         {
-            // get first carController
-            GameObject winner = carsController.cars[0];
+            // pause the game if only one car is left
+            if (carCount == 1)
+            {
+                // get first carController
+                GameObject winner = carsController.cars[0];
 
-            // set winnerText to winning car
-            winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
-            //Time.timeScale = 0;
-        }
+                // set winnerText to winning car
+                winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
+                //Time.timeScale = 0;
+            }
 
-        // or if no one is left
-        if (carCount == 0)
-        {
-            winnerText.text = "No one won!";
-            //Time.timeScale = 0;
+            // or if no one is left
+            if (carCount == 0)
+            {
+                winnerText.text = "No one won!";
+                //Time.timeScale = 0;
+            }
         }
     }
 
