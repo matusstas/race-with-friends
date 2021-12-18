@@ -659,7 +659,10 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '[Space] - confirm angle / speed
 
-    [Enter} - use boost'
+    [Enter] - use boost
+
+    [H] - show
+    controls during game'
 --- !u!222 &2106279303
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -18,7 +18,23 @@ public class ControlsMenu : MonoBehaviour
 
     public void BackBtnClick()
     {
-        // load main menu scene
-        SceneManager.LoadScene("MainMenu");
+        int isHPressed = PlayerPrefs.GetInt("isHPressed");
+        if (isHPressed == 1) {
+            PlayerPrefs.SetInt("isHPressed", 0);
+
+            string gameMode = PlayerPrefs.GetString("gameMode");
+            if (gameMode == "race")
+            {
+                // load race scene
+                SceneManager.LoadScene("NewRace");
+            } else
+            {
+                // load autodrom scene
+                SceneManager.LoadScene("AutodromScene");
+            }
+        } else {
+            // load main menu scene
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }

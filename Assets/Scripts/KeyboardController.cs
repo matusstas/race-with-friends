@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class KeyboardController : MonoBehaviour
 {
@@ -22,13 +23,21 @@ public class KeyboardController : MonoBehaviour
         {
             Debug.Log("space");
             carsController?.selectedCar.GetComponent<CarController>().NextState();
+            Debug.Log("space pressed");
         }
 
         if (Input.GetKeyDown("enter") || Input.GetKeyDown("return"))
         {
+            Debug.Log("enter or return pressed");
             carsController?.selectedCar.GetComponent<CarController>().UseBoost();
             guiController?.HideBoost();
 
+        }        
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Debug.Log("h pressed");
+            PlayerPrefs.SetInt("isHPressed", 1);
+            SceneManager.LoadScene("ControlsScene");
         }
     }
 }
