@@ -125,22 +125,48 @@ public class GuiController : MonoBehaviour
         int carCount = carsController.cars.Count;
         if (PlayerPrefs.GetString("gameMode")=="autodrom")
         {
-            // pause the game if only one car is left
-            if (carCount == 1)
-            {
-                // get first carController
-                GameObject winner = carsController.cars[0];
 
-                // set winnerText to winning car
-                winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
-                //Time.timeScale = 0;
+            if(PlayerPrefs.GetString("mode")=="all")
+            {
+                // pause the game if only one car is left
+                if (carCount == 1)
+                {
+                    // get first carController
+                    GameObject winner = carsController.cars[0];
+
+                    // set winnerText to winning car
+                    winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
+                    //Time.timeScale = 0;
+                }
+
+                // or if no one is left
+                if (carCount == 0)
+                {
+                    winnerText.text = "No one won!";
+                    //Time.timeScale = 0;
+                }
             }
 
-            // or if no one is left
-            if (carCount == 0)
+            else
             {
-                winnerText.text = "No one won!";
-                //Time.timeScale = 0;
+                bool oneTeam=true;
+                int teamNum=-1;
+                foreach(GameObject car in carsController.cars)
+                {
+                    int num=car.GetComponent<CarController>().teamId;
+                    if (teamNum==-1)
+                        teamNum=num;
+                    if (num!=teamNum)
+                    {
+                        oneTeam=false;
+                        break;
+                    }
+                }
+                if (oneTeam)
+                {
+                    GameObject winner = carsController.cars[0];
+                    winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + "> Team" + winner.GetComponent<CarController>().teamId + "</color> " + " won!";
+                }
             }
         } else 
         {
