@@ -41,8 +41,8 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             {
                 float minX = -7.5f;
                 float maxX = +7.5f;
-                float minY = -3.5f;
-                float maxY = +3.5f;
+                float minY = -3.6f;
+                float maxY = +3.6f;
                 newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
                 newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
             }
