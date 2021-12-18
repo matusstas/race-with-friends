@@ -53,6 +53,7 @@ public class AutodromInit : MonoBehaviour
             newCarNumber.GetComponent<TextMesh>().text = i.ToString();
 
             // create new car
+            carTemplate.transform.localScale = new Vector3(0.3f, 0.3f, 1);
             GameObject newCar = Instantiate(carTemplate, randomPosition, Quaternion.Euler(0, 0, randomRotation));
 
             newCar.tag = "Car";
