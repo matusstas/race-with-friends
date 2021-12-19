@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RaceInit : MonoBehaviour
 {
@@ -29,16 +31,12 @@ public class RaceInit : MonoBehaviour
 
         //get startline prefab
         start=GameObject.FindGameObjectWithTag("Start");
-       
         GenerateNewCars(carCount);  // then generate the rest of the cars
-
-        Debug.Log("XXX");
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -75,7 +73,7 @@ public class RaceInit : MonoBehaviour
             GameObject newCar = Instantiate(carTemplate, startCarPosition, startRotation);
             
             newCar.tag = "Car";
-            newCar.GetComponent<CarController>().name = "Car" + i;
+            newCar.GetComponent<CarController>().name = Global.carNames[i];
             newCar.GetComponent<CarController>().carNumberTemplate = newCarNumber;
             
             
@@ -85,8 +83,4 @@ public class RaceInit : MonoBehaviour
 
         Debug.Log("Generated " + count + " cars");
     }
-
-
-
-
 }

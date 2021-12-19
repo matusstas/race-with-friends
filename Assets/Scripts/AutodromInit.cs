@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AutodromInit : MonoBehaviour
 {
@@ -9,14 +11,9 @@ public class AutodromInit : MonoBehaviour
     public GameObject carTemplate;
     public GameObject carNumberTemplate;
 
-
     void Awake()
     {
         carCount = PlayerPrefs.GetInt("numberOfPlayers");
-        if (carCount < 1)
-        {
-            Debug.LogError("carCount has to be greater than 0");
-        }
         GenerateNewCars(carCount);  // then generate the rest of the cars
 
         GameObject firstCar = GameObject.FindGameObjectsWithTag("Car")[0];
@@ -31,7 +28,6 @@ public class AutodromInit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
 
@@ -57,7 +53,9 @@ public class AutodromInit : MonoBehaviour
             GameObject newCar = Instantiate(carTemplate, randomPosition, Quaternion.Euler(0, 0, randomRotation));
 
             newCar.tag = "Car";
-            newCar.GetComponent<CarController>().name = "Car" + i;
+            // Debug.Log("CAR NAME: " + inputFields[i]);
+            // newCar.GetComponent<CarController>().name = "Car" + i;
+            newCar.GetComponent<CarController>().name = Global.carNames[i];
             newCar.GetComponent<CarController>().carNumberTemplate = newCarNumber;
 
             //set mode
@@ -81,18 +79,3 @@ public class AutodromInit : MonoBehaviour
         Debug.Log("Generated " + count + " cars");
     }
 }
-
-
-            // // create new car number
-            // GameObject newCarNumber = Instantiate(carNumberTemplate, startCarPosition, startRotation);
-            // newCarNumber.tag = "CarNumber";
-            // newCarNumber.GetComponent<TextMesh>().text = i.ToString();
-
-            // // create new car
-            // GameObject newCar = Instantiate(carTemplate, startCarPosition, startRotation);
-            
-            // newCar.tag = "Car";
-            // newCar.GetComponent<CarController>().name = "Car" + i;
-            // newCar.GetComponent<CarController>().carNumberTemplate = newCarNumber;
-            
-            

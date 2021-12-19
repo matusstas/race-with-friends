@@ -218,7 +218,13 @@ public class GuiController : MonoBehaviour
 
     private void BackBtnClick()
     {
-        SceneManager.LoadScene("PlayScene");
+        if (PlayerPrefs.GetString("gameMode") == "race")
+        {
+            SceneManager.LoadScene("RaceScene");   
+        } else
+        {
+            SceneManager.LoadScene("NamePlayersScene");
+        }
     }
 
 

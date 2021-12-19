@@ -31,14 +31,14 @@ public class AutodromMenu : MonoBehaviour
     {
         // load race scene
         PlayerPrefs.SetString("mode", "all");
-        SceneManager.LoadScene("AutodromScene");
+        SceneManager.LoadScene("NamePlayersScene");
     }
 
     public void TeamBtnClick()
     {
         // load autodrom scene
          PlayerPrefs.SetString("mode", "team");
-        SceneManager.LoadScene("AutodromScene");
+        SceneManager.LoadScene("NamePlayersScene");
     }
 
     public void BackBtnClick()

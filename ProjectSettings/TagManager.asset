@@ -13,6 +13,7 @@ TagManager:
   - Slider
   - CarNumber
   - Controlls
+  - Canvas
   layers:
   - Default
   - TransparentFX
