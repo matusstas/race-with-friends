@@ -63,7 +63,7 @@ public class AutodromWinCondition : MonoBehaviour
         // or if no one is left
         if (carCount == 0)
         {
-           guiController.ShowResultsOther("No one won!!");
+           guiController.ShowResultsOther("No one won!!\n(both cars died in last crash)");
         }
     }
 
@@ -77,7 +77,7 @@ public class AutodromWinCondition : MonoBehaviour
         if (carCount == 0)
         {
             
-            guiController.ShowResultsOther("No one won!!");
+            guiController.ShowResultsOther("No one won!!\n(both cars died in last crash)");
         }
 
         else

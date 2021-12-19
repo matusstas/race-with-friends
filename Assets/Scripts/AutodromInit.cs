@@ -73,6 +73,7 @@ public class AutodromInit : MonoBehaviour
             newCarNumber.GetComponent<TextMesh>().text = i.ToString();
 
             // create new car
+            carTemplate.transform.localScale = new Vector3(0.35f, 0.35f, 1);
             GameObject newCar = Instantiate(carTemplate, randomPosition, Quaternion.Euler(0, 0, randomRotation));
 
             newCar.tag = "Car";
@@ -90,7 +91,7 @@ public class AutodromInit : MonoBehaviour
             {
                 if (i%2 == 0)
                 {
-                    newCar.GetComponent<CarController>().teamId = i;
+                    newCar.GetComponent<CarController>().teamId = i%2;
                     newCar.GetComponent<SpriteRenderer>().color = Color.red;
                 } else 
                 {
