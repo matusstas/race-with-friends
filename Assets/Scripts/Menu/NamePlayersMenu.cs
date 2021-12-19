@@ -99,7 +99,11 @@ public class NamePlayersMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // on tab press
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            OnTabPress();
+        }
     }
 
     public void SubmitBtnClick()
@@ -139,4 +143,37 @@ public class NamePlayersMenu : MonoBehaviour
         }
     }
 
+    // on tab press move to next input field
+    public void OnTabPress()
+    {
+        // get focused input field
+        InputField focusedInputField = null;
+        foreach (InputField inputField in inputFields)
+        {
+            if (inputField.isFocused)
+            {
+                focusedInputField = inputField;
+                break;
+            }
+        }
+        
+        // if focused input field is not null
+        if (focusedInputField != null)
+        {
+            // get index of focused input field
+            int focusedInputFieldIndex = inputFields.IndexOf(focusedInputField);
+
+            // if focused input field is not last input field
+            if (focusedInputFieldIndex < inputFields.Count - 1)
+            {
+                // move to next input field
+                inputFields[focusedInputFieldIndex + 1].ActivateInputField();
+            }
+            else
+            {
+                // move to first input field
+                inputFields[0].ActivateInputField();
+            }
+        }
+    }
 }
