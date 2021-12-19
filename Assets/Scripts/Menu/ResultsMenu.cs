@@ -24,18 +24,16 @@ public class ResultsMenu : MonoBehaviour
     {
         if (PlayerPrefs.GetString("gameMode") == "race")
         {
-            // int levelNumber = PlayerPrefs.GetInt("level");
+            int levelNumber = PlayerPrefs.GetInt("level");
 
-            // if (levelNumber == 0)
-            // {
-            //     // SceneManager.UnloadScene("NewRace");
-            // }
-            // else
-            // {
-
-            // }
-
-            SceneManager.LoadScene("NewRace");
+            if (levelNumber == 0)
+            {
+                SceneManager.LoadScene("DrawRaceScene");
+            }
+            else
+            {
+                SceneManager.LoadScene("NewRace");
+            }
         }
         else
         {

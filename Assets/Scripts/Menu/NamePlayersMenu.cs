@@ -52,6 +52,9 @@ public class NamePlayersMenu : MonoBehaviour
                 inputFields[i].text = generateCarName(i);
             }
         }
+
+        // focus on first input field
+        inputFields[0].Select();
     }
 
     // get name from Global.carNames if exists fron index
