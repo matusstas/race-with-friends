@@ -38,6 +38,18 @@ public class PlayDrawnRace : MonoBehaviour
             {
                 Destroy(obj);
             }
+
+            // if object has a DragAndDrop script, destroy that script
+            if (obj.GetComponent<DragAndDrop>() != null)
+            {
+                Destroy(obj.GetComponent<DragAndDrop>());
+            }
+
+            // if object has a DrawPath script, destroy that script
+            if (obj.GetComponent<DrawPath>() != null)
+            {
+                Destroy(obj.GetComponent<DrawPath>());
+            }
         }
 
         // // create copy of drawnRace and disable it
