@@ -32,13 +32,14 @@ public class NamePlayersMenu : MonoBehaviour
         GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
 
         // zatial pre race
-
         int offset = 80;
         if (PlayerPrefs.GetString("mode") == "all")
         {
             for (int i = 0; i < carCount; i++)
             {
-                inputFields.Add(Instantiate(inputField, new Vector3(960,800-(i*offset+offset),0), Quaternion.identity, canvas.transform));            
+
+                // transform.localPosition = Vector3.zero;
+                inputFields.Add(Instantiate(inputField, new Vector3(0,800-(i*offset+offset),0), Quaternion.identity, canvas.transform));            
                 if (Global.carNames.Count > i)
                 {
                     inputFields[i].text = Global.carNames[i];
