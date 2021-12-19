@@ -32,14 +32,44 @@ public class NamePlayersMenu : MonoBehaviour
         GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
 
         // zatial pre race
-        for (int i = 0; i < carCount; i++)
+
+        if (PlayerPrefs.GetString("mode") == "all")
         {
-            inputFields.Add(Instantiate(inputField, new Vector3(500,500-(i*30+30),0), Quaternion.identity, canvas.transform));            
-            if (Global.carNames.Count > i)
+            for (int i = 0; i < carCount; i++)
             {
-                inputFields[i].text = Global.carNames[i];
-            } else {
-                inputFields[i].text = "Car " + i;
+                inputFields.Add(Instantiate(inputField, new Vector3(500,500-(i*30+30),0), Quaternion.identity, canvas.transform));            
+                if (Global.carNames.Count > i)
+                {
+                    inputFields[i].text = Global.carNames[i];
+                } else {
+                    inputFields[i].text = "Car " + i;
+                }
+            }
+        } else
+        {
+            int indexTeam1 = 0;
+            int indexTeam2 = 0;
+            for (int i = 0; i < carCount; i++)
+            {
+                string carName;
+                if (Global.carNames.Count > i)
+                {
+                    carName = Global.carNames[i];
+                } else {
+                    carName = "Car " + i;
+                }
+
+                if (i%2 == 0)
+                {
+                    inputFields.Add(Instantiate(inputField, new Vector3(350,500-(indexTeam1*30+30),0), Quaternion.identity, canvas.transform));
+                    indexTeam1++;
+                } else 
+                {
+                    inputFields.Add(Instantiate(inputField, new Vector3(650,500-(indexTeam2*30+30),0), Quaternion.identity, canvas.transform));
+                    indexTeam2++;
+                }
+
+                inputFields[i].text = carName;
             }
         }
     }
@@ -58,8 +88,13 @@ public class NamePlayersMenu : MonoBehaviour
             Global.carNames.Add(inputField.text);
         }
 
-        // Load play scene
-        SceneManager.LoadScene("AutodromScene");
+        if (PlayerPrefs.GetString("gameMode") == "autodrom")
+        {
+            SceneManager.LoadScene("AutodromScene");
+        } else 
+        {
+            SceneManager.LoadScene("RaceScene");
+        }
     }
 
     public void BackBtnClick()
@@ -70,7 +105,14 @@ public class NamePlayersMenu : MonoBehaviour
             Global.carNames.Add(inputField.text);
         }
         // Load autodrom scene
-        SceneManager.LoadScene("AutodromMenuScene");
+
+        if (PlayerPrefs.GetString("gameMode") == "autodrom")
+        {
+            SceneManager.LoadScene("AutodromMenuScene");        
+        } else
+        {
+            SceneManager.LoadScene("PlayScene");
+        }
     }
 
 }

@@ -108,20 +108,17 @@ public class GuiController : MonoBehaviour
 
     private void UpdateCarHealthGUI()
     {
-        if (PlayerPrefs.GetString("gameMode")=="autodrom")
+        // update car health in gui
+        string hText = "Health:\n";
+        foreach (GameObject car in carsController.cars)
         {
-            // update car health in gui
-            string hText = "Health:\n";
-            foreach (GameObject car in carsController.cars)
+            if (car != null)
             {
-                if (car != null)
-                {
-                    // get hex color of car and add it to <color> tag
-                    hText += "<color=#" + ColorUtility.ToHtmlStringRGB(car.GetComponent<SpriteRenderer>().color) + ">" + car.GetComponent<CarController>().name + "</color> " + Mathf.Round(car.GetComponent<CarController>().health) + "\n";
-                }
+                // get hex color of car and add it to <color> tag
+                hText += "<color=#" + ColorUtility.ToHtmlStringRGB(car.GetComponent<SpriteRenderer>().color) + ">" + car.GetComponent<CarController>().name + "</color> " + Mathf.Round(car.GetComponent<CarController>().health) + "\n";
             }
-            healthText.text = hText + "";
         }
+        healthText.text = hText + "";
     }
 
 

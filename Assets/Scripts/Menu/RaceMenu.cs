@@ -59,6 +59,6 @@ public class RaceMenu : MonoBehaviour
     {
         // load main menu scene
         // SceneManager.LoadScene("ChooseNumberOfPlayersScene");
-        SceneManager.LoadScene("PlayScene");
+        SceneManager.LoadScene("NamePlayersScene");
     }
 }

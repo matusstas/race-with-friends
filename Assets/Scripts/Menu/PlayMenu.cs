@@ -31,7 +31,9 @@ public class PlayMenu : MonoBehaviour
     {
         // load race scene
         // SceneManager.LoadScene("ChooseNumberOfPlayersScene");
-        SceneManager.LoadScene("RaceScene"); 
+        // SceneManager.LoadScene("RaceScene");
+        SceneManager.LoadScene("NamePlayersScene"); 
+        PlayerPrefs.SetString("mode", "all");
         PlayerPrefs.SetString("gameMode","race");
     }
 
