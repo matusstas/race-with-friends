@@ -66,12 +66,13 @@ public class RaceInit : MonoBehaviour
             Quaternion startRotation = start.transform.rotation;
 
             // create new car number
-            carNumberTemplate.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+            carNumberTemplate.transform.localScale = new Vector3(0.6f, 0.6f, 1);
             GameObject newCarNumber = Instantiate(carNumberTemplate, startCarPosition, startRotation);
             newCarNumber.tag = "CarNumber";
             newCarNumber.GetComponent<TextMesh>().text = i.ToString();
 
             // create new car
+            carTemplate.transform.localScale = new Vector3(0.18f, 0.18f, 1);
             GameObject newCar = Instantiate(carTemplate, startCarPosition, startRotation);
             
             newCar.tag = "Car";

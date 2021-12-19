@@ -67,17 +67,15 @@ public class AutodromInit : MonoBehaviour
 
 
             // create new car number
+            carNumberTemplate.transform.localScale = new Vector3(0.9f, 0.9f, 1);
             GameObject newCarNumber = Instantiate(carNumberTemplate, randomPosition, Quaternion.Euler(0, 0, randomRotation));
             newCarNumber.tag = "CarNumber";
             newCarNumber.GetComponent<TextMesh>().text = i.ToString();
 
             // create new car
-            carTemplate.transform.localScale = new Vector3(0.3f, 0.3f, 1);
             GameObject newCar = Instantiate(carTemplate, randomPosition, Quaternion.Euler(0, 0, randomRotation));
 
             newCar.tag = "Car";
-            // Debug.Log("CAR NAME: " + inputFields[i]);
-            // newCar.GetComponent<CarController>().name = "Car" + i;
             newCar.GetComponent<CarController>().name = Global.carNames[i];
             newCar.GetComponent<CarController>().carNumberTemplate = newCarNumber;
 
@@ -86,16 +84,17 @@ public class AutodromInit : MonoBehaviour
             if(mode=="all")
             {
                 newCar.GetComponent<CarController>().teamId = i;
-                // newCar.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
                 newCar.GetComponent<SpriteRenderer>().color = colors[i];
             }
             else
             {
                 if (i%2 == 0)
                 {
+                    newCar.GetComponent<CarController>().teamId = i;
                     newCar.GetComponent<SpriteRenderer>().color = Color.red;
                 } else 
                 {
+                    newCar.GetComponent<CarController>().teamId = i%2;
                     newCar.GetComponent<SpriteRenderer>().color = Color.blue;
                 }
             }
