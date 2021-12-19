@@ -56,7 +56,7 @@ public class GuiController : MonoBehaviour
     {
         CarController selectedCar = carsController.selectedCar.GetComponent<CarController>();
         if (selectedCar.boost){
-            boost=(GameObject)Instantiate(selectedCar.boost.gameObject, new Vector3(8,-4,0), Quaternion.identity);
+            boost=(GameObject)Instantiate(selectedCar.boost.gameObject, new Vector3(7.5f,-4,0), Quaternion.identity);
             
         }
         controlls=GameObject.FindGameObjectWithTag("Controlls");
