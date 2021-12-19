@@ -15,6 +15,8 @@ public class NamePlayersMenu : MonoBehaviour
 
     public List<InputField> inputFields = new List<InputField>();
 
+    public GameObject teamTxts;
+
 
     void Awake()
     {
@@ -41,6 +43,7 @@ public class NamePlayersMenu : MonoBehaviour
                 inputFields.Add(inputFieldObj.GetComponent<InputField>());
                 inputFields[i].text = generateCarName(i);
             }
+            teamTxts.SetActive(false);
         }
         else
         {
@@ -51,6 +54,8 @@ public class NamePlayersMenu : MonoBehaviour
                 inputFields.Add(inputFieldObj.GetComponent<InputField>());
                 inputFields[i].text = generateCarName(i);
             }
+
+            teamTxts.SetActive(true);
         }
 
         // focus on first input field
