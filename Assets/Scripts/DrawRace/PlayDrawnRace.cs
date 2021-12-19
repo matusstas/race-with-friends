@@ -12,6 +12,8 @@ public class PlayDrawnRace : MonoBehaviour
 
     public Button backBtn;
 
+    // public GameObject drawnRace;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,12 @@ public class PlayDrawnRace : MonoBehaviour
                 Destroy(obj);
             }
         }
+
+        // // create copy of drawnRace and disable it
+        // GameObject copy = Instantiate(drawnRace);
+        // copy.SetActive(false);
+        // copy.name = "DrawnRaceCopy";
+
 
         // load new scene without destroying current one
         Application.LoadLevelAdditive("NewRace");

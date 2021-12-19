@@ -180,7 +180,7 @@ public class GuiController : MonoBehaviour
             }
         } else 
         {
-            int originalCarCount = PlayerPrefs.GetInt("numberOfPlayers");
+            int originalCarCount = PlayerPrefs.GetInt("numberOfPlayers", 2);
             if (originalCarCount - carCount == 1)
             {
                 GameObject winner = carToBeDestroyed;

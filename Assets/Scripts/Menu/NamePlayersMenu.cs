@@ -18,7 +18,7 @@ public class NamePlayersMenu : MonoBehaviour
 
     void Awake()
     {
-        carCount = PlayerPrefs.GetInt("numberOfPlayers");
+        carCount = PlayerPrefs.GetInt("numberOfPlayers", 2);
         Debug.Log("carCount: " + carCount);
     }
 

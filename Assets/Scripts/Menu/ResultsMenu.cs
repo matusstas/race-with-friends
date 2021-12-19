@@ -17,20 +17,34 @@ public class ResultsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void AgainBtn()
     {
-        if (PlayerPrefs.GetString("gameMode")=="race")
+        if (PlayerPrefs.GetString("gameMode") == "race")
+        {
+            // int levelNumber = PlayerPrefs.GetInt("level");
+
+            // if (levelNumber == 0)
+            // {
+            //     // SceneManager.UnloadScene("NewRace");
+            // }
+            // else
+            // {
+
+            // }
+
             SceneManager.LoadScene("NewRace");
+        }
         else
+        {
             SceneManager.LoadScene("AutodromScene");
+        }
     }
 
     void MenuBtn()
     {
         SceneManager.LoadScene("MainMenu");
     }
-    
 }
