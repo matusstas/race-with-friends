@@ -48,6 +48,8 @@ public class RaceInit : MonoBehaviour
 
     private void GenerateNewCars(int count)
     {
+        Color[] colors = {Color.red, Color.green, Color.blue, Color.cyan, Color.gray, Color.magenta, Color.yellow, Color.white, Color.black, Color.gray};
+
         // creates new car objects, count is the number of cars to create
         for (int i = 0; i < count; i++)
         {
@@ -77,8 +79,7 @@ public class RaceInit : MonoBehaviour
             newCar.GetComponent<CarController>().carNumberTemplate = newCarNumber;
             
             
-            // set car color to random color
-            newCar.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+            newCar.GetComponent<SpriteRenderer>().color = colors[i];
         }
 
         Debug.Log("Generated " + count + " cars");
