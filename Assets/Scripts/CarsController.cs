@@ -88,7 +88,13 @@ public class CarsController : MonoBehaviour
 
         // find index in a list
         int indexOfToBeDestroyedCar = cars.IndexOf(carToBeDestroyed);
-        results.Add((string)cars[indexOfToBeDestroyedCar].name);
+
+        string carColor = ColorUtility.ToHtmlStringRGB(cars[indexOfToBeDestroyedCar].GetComponent<SpriteRenderer>().color);
+        string carName = cars[indexOfToBeDestroyedCar].GetComponent<CarController>().name;
+
+        results.Add("<color=#" + carColor + ">" + carName + "</color>");
+
+        //results.Add((string)cars[indexOfToBeDestroyedCar].name);
         cars.RemoveAt(indexOfToBeDestroyedCar);
         carNumbers.RemoveAt(indexOfToBeDestroyedCar);
         

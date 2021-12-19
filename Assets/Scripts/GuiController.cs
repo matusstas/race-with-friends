@@ -144,10 +144,11 @@ public class GuiController : MonoBehaviour
                     // get first carController
                     GameObject winner = carsController.cars[0];
 
-                    // set winnerText to winning car
-                    winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
-                    //Time.timeScale = 0;
-                    carsController.results.Add((string)carsController.cars[0].name);
+                    string carColor = ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color);
+                    string carName = winner.GetComponent<CarController>().name;
+
+                    carsController.results.Add("<color=#" + carColor + ">" + carName + "</color>");
+                    
                     carsController.results.Reverse();
                     ShowResults(carsController.results);
                 }
@@ -192,8 +193,11 @@ public class GuiController : MonoBehaviour
             if (originalCarCount - carCount == 1)
             {
                 GameObject winner = carToBeDestroyed;
-                winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
-                
+                //winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
+                string carColor = ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color);
+                string carName = winner.GetComponent<CarController>().name;
+
+                carsController.results.Add("<color=#" + carColor + ">" + carName + "</color>");
             }
             if (carCount == 1)
             {
