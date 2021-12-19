@@ -119,7 +119,7 @@ public class GuiController : MonoBehaviour
 
                 if (PlayerPrefs.GetString("gameMode") == "race")
                 {
-                    hText += carName + "\n";
+                    hText += "<color=#" + carColor + ">" + carName + "</color>\n";
                 } else
                 {
                     hText += "<color=#" + carColor + ">" + carName + "</color>: " + carHealth + "hp\n";
