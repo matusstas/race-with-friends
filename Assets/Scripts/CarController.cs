@@ -187,8 +187,16 @@ public class CarController : MonoBehaviour
         {
             GameObject movingCar=collision.gameObject;
             float speed = movingCar.GetComponent<Rigidbody2D>().velocity.magnitude;
-            if (!shield && teamId != movingCar.GetComponent<CarController>().teamId)
-                health -= speed * 10;
+            if (!shield && teamId != movingCar.GetComponent<CarController>().teamId) {
+                // if the car is currently selected, don't decrease that much health
+                if (carState == CarState.ANIMATING)
+                {
+                    health -= speed * 5;
+                }
+                else {
+                    health -= speed * 10;
+                }
+            }
         }
 
         else if (bouncy){
