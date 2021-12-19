@@ -112,7 +112,7 @@ public class GuiController : MonoBehaviour
     {
         string hText = "";
         int carCount = PlayerPrefs.GetInt("numberOfPlayers");
-        for (int i = 0; i < carCount; i++)
+        for (int i = 0; i < carsController.cars.Count; i++)
         {
             GameObject car = carsController.cars[i];
             if (car != null)

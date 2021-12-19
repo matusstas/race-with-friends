@@ -42,8 +42,8 @@ public class CarController : MonoBehaviour
         if (health <= 0)
         {
             GlobalEvents.CarDestroyed.Invoke(gameObject);
-            Destroy(gameObject);
             Destroy(gameObject.GetComponent<CarController>().carNumberTemplate);
+            Destroy(gameObject);
         }
         if (carState == CarState.SELECTING_ANGLE)
         {
