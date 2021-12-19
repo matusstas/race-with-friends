@@ -34,7 +34,7 @@ public class GuiController : MonoBehaviour
 
         // add listener
         GlobalEvents.CarStateChanged.AddListener(CarStateChanged);
-        GlobalEvents.CarTurnEnd.AddListener(ShowBoost);
+        // GlobalEvents.CarTurnEnd.AddListener(ShowBoost);
         
 
         // back button
@@ -46,7 +46,7 @@ public class GuiController : MonoBehaviour
     {
         // remove listener
         GlobalEvents.CarStateChanged.RemoveListener(CarStateChanged);
-        GlobalEvents.CarTurnEnd.RemoveListener(ShowBoost);
+        // GlobalEvents.CarTurnEnd.RemoveListener(ShowBoost);
 
     }
 
@@ -68,6 +68,7 @@ public class GuiController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ShowBoost();
         UpdateCarHealthGUI();
         UpdateSlidersGUI();
     }
