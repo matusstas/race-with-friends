@@ -22,10 +22,9 @@ public class BoostController : MonoBehaviour
     {
         Debug.Log("ZOBRATY BOOST");
         Debug.Log(other.GetComponent<CarController>().name);
-        other.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
         other.GetComponent<CarController>().boost = gameObject.GetComponent<BoostAction>();
         Debug.Log(other.GetComponent<CarController>().boost);
         Debug.Log(gameObject.name);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }
