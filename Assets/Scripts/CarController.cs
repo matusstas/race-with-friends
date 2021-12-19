@@ -176,7 +176,7 @@ public class CarController : MonoBehaviour
     {
         Debug.Log("SOM V CIELI");
         GlobalEvents.CarDestroyed.Invoke(gameObject);
-        // Destroy(gameObject.GetComponent<CarController>().carNumberTemplate);
+        Destroy(gameObject.GetComponent<CarController>().carNumberTemplate);
         Destroy(gameObject);
     }
 
