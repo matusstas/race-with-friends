@@ -118,16 +118,17 @@ public class GuiController : MonoBehaviour
             if (car != null)
             {
                 string carColor = ColorUtility.ToHtmlStringRGB(car.GetComponent<SpriteRenderer>().color);
+                string carNumber = car.GetComponent<CarController>().carNumberTemplate.GetComponent<TextMesh>().text;
                 string carName = car.GetComponent<CarController>().name;
                 float carHealth = Mathf.Round(car.GetComponent<CarController>().health);
 
                 if (PlayerPrefs.GetString("gameMode") == "race")
                 {
-                    hText += "<color=#" + carColor + "> " + i + " " + carName + "</color>\n";
+                    hText += "<color=#" + carColor + "> " + carNumber + " " + carName + "</color>\n";
                 }
                 else
                 {
-                    hText += "<color=#" + carColor + "> " + i + " " + carName + "</color>: " + carHealth + "hp\n";
+                    hText += "<color=#" + carColor + "> " + carNumber + " " + carName + "</color>: " + carHealth + "hp\n";
                 }
             }
         }
