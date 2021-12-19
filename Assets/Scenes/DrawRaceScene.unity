@@ -1014,7 +1014,6 @@ MonoBehaviour:
   - {fileID: 1075062683}
   UIRootObject: {fileID: 65549402}
   backBtn: {fileID: 551219568}
-  drawnRace: {fileID: 65549402}
 --- !u!1001 &766976352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1734,7 +1733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2538425278636986200, guid: c1a1fbb178ebc6241bc0668c12c89033, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 223.57857
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2538425278636986200, guid: c1a1fbb178ebc6241bc0668c12c89033, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1968,7 +1967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5956551662152403743, guid: 5afb18c40fa7e38478512c64d1c86be5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 223.57857
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5956551662152403743, guid: 5afb18c40fa7e38478512c64d1c86be5, type: 3}
       propertyPath: m_LocalRotation.w
