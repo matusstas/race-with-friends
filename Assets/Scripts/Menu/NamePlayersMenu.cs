@@ -33,11 +33,12 @@ public class NamePlayersMenu : MonoBehaviour
 
         // zatial pre race
 
+        int offset = 80;
         if (PlayerPrefs.GetString("mode") == "all")
         {
             for (int i = 0; i < carCount; i++)
             {
-                inputFields.Add(Instantiate(inputField, new Vector3(500,500-(i*30+30),0), Quaternion.identity, canvas.transform));            
+                inputFields.Add(Instantiate(inputField, new Vector3(960,800-(i*offset+offset),0), Quaternion.identity, canvas.transform));            
                 if (Global.carNames.Count > i)
                 {
                     inputFields[i].text = Global.carNames[i];
@@ -61,11 +62,11 @@ public class NamePlayersMenu : MonoBehaviour
 
                 if (i%2 == 0)
                 {
-                    inputFields.Add(Instantiate(inputField, new Vector3(350,500-(indexTeam1*30+30),0), Quaternion.identity, canvas.transform));
+                    inputFields.Add(Instantiate(inputField, new Vector3(300,800-(indexTeam1*offset+offset),0), Quaternion.identity, canvas.transform));
                     indexTeam1++;
                 } else 
                 {
-                    inputFields.Add(Instantiate(inputField, new Vector3(650,500-(indexTeam2*30+30),0), Quaternion.identity, canvas.transform));
+                    inputFields.Add(Instantiate(inputField, new Vector3(700,800-(indexTeam2*offset+offset),0), Quaternion.identity, canvas.transform));
                     indexTeam2++;
                 }
 
