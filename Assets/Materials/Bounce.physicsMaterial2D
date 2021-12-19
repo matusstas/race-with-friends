@@ -8,4 +8,4 @@ PhysicsMaterial2D:
   m_PrefabAsset: {fileID: 0}
   m_Name: Bounce
   friction: 1000
-  bounciness: 7
+  bounciness: 1

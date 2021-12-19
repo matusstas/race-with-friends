@@ -6,6 +6,7 @@ using UnityEngine;
 public class CarsController : MonoBehaviour
 {
     public List<GameObject> cars;
+    public List<string> results;
     public List<GameObject> carNumbers;
 
     [HideInInspector]
@@ -87,6 +88,7 @@ public class CarsController : MonoBehaviour
 
         // find index in a list
         int indexOfToBeDestroyedCar = cars.IndexOf(carToBeDestroyed);
+        results.Add((string)cars[indexOfToBeDestroyedCar].name);
         cars.RemoveAt(indexOfToBeDestroyedCar);
         carNumbers.RemoveAt(indexOfToBeDestroyedCar);
         

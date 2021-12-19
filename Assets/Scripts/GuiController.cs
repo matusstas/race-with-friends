@@ -18,6 +18,9 @@ public class GuiController : MonoBehaviour
     public Text healthText;
     public Text winnerText;
 
+    public Text resultsText;
+    public GameObject resultsPanel;
+
     public Button backBtn;
     private GameObject boost;
 
@@ -60,6 +63,8 @@ public class GuiController : MonoBehaviour
         }
         controlls=GameObject.FindGameObjectWithTag("Controlls");
         controlls.SetActive(false);
+        resultsPanel.SetActive(false);
+        Debug.Log("Results",resultsPanel);
     }
 
     // Update is called once per frame
@@ -137,6 +142,9 @@ public class GuiController : MonoBehaviour
                     // set winnerText to winning car
                     winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
                     //Time.timeScale = 0;
+                    carsController.results.Add((string)carsController.cars[0].name);
+                    carsController.results.Reverse();
+                    ShowResults(carsController.results);
                 }
 
                 // or if no one is left
@@ -144,6 +152,8 @@ public class GuiController : MonoBehaviour
                 {
                     winnerText.text = "No one won!";
                     //Time.timeScale = 0;
+
+                    //ShowResults();
                 }
             }
 
@@ -166,7 +176,10 @@ public class GuiController : MonoBehaviour
                 {
                     GameObject winner = carsController.cars[0];
                     winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + "> Team" + winner.GetComponent<CarController>().teamId + "</color> " + " won!";
+                    //TODO obrazovka ktory team vyhral
+                    //ShowResults();
                 }
+
             }
         } else 
         {
@@ -175,6 +188,12 @@ public class GuiController : MonoBehaviour
             {
                 GameObject winner = carToBeDestroyed;
                 winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
+                
+            }
+            if (carCount == 1)
+            {
+                carsController.results.Add((string)carsController.cars[0].name);
+                ShowResults(carsController.results);
             }
         }
     }
@@ -212,6 +231,17 @@ public class GuiController : MonoBehaviour
         else
         {
             controlls.SetActive(true);
+        }
+    }
+
+    private void ShowResults(List<string> results)
+    {
+        resultsPanel.SetActive(true);
+        resultsPanel.GetComponent<Image>().color=Color.red;
+        resultsText.text="Results: \n";
+        for(int i=0; i<results.Count; i++)
+        {
+            resultsText.text+=(i+1)+". place: "+results[i]+"\n";
         }
     }
 }
