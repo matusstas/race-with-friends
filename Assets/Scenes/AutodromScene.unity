@@ -759,6 +759,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carTemplate: {fileID: 8519429719291867351, guid: 1db75d20220b347479efab2b187693e3, type: 3}
   carNumberTemplate: {fileID: 7402864341134010100, guid: 45487919e3f7dc52b9c3fb62339910fd, type: 3}
+  boostsAndObstacles:
+  - {fileID: 3094705587069042825, guid: 738e1a648b54cf1499b7383c2788efd0, type: 3}
+  - {fileID: 3366671019772660537, guid: 463e45b0baaa96040bb0b8db8a85cc65, type: 3}
+  - {fileID: 8264822297022375915, guid: ec7cf70d791f90d41bc9232b9b593094, type: 3}
+  - {fileID: 1019446099981311989, guid: ca56afe9ab26495028d7b742e7601da0, type: 3}
+  - {fileID: 667391934891155786, guid: 900191170b197d13aacd0a3645907973, type: 3}
+  - {fileID: 2132347489370494145, guid: e97b4bfa44a64f4bda9c2e1f57f1fc80, type: 3}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0

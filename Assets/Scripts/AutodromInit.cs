@@ -11,9 +11,12 @@ public class AutodromInit : MonoBehaviour
     public GameObject carTemplate;
     public GameObject carNumberTemplate;
 
+    public GameObject[] boostsAndObstacles;
+
     void Awake()
     {
         carCount = PlayerPrefs.GetInt("numberOfPlayers");
+        GenerateNewBoostsAndObstacles(10);
         GenerateNewCars(carCount);  // then generate the rest of the cars
 
         GameObject firstCar = GameObject.FindGameObjectsWithTag("Car")[0];
@@ -28,6 +31,25 @@ public class AutodromInit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+
+    private void GenerateNewBoostsAndObstacles(int count)
+    {
+        // creates new boost and obstacke objects, count is the number of boosts and obstacles to create
+        for (int i = 0; i < count; i++)
+        {
+            // get random 2d position that isn't too close to other objects
+            Vector2 randomPosition = Helpers.GetRandomPosition(2f);
+
+            float rotation = 0; // in degrees
+
+            // create new boost
+            GameObject newBoost = Instantiate(boostsAndObstacles[Random.Range(0, boostsAndObstacles.Length)], randomPosition, Quaternion.Euler(0, 0, rotation));
+            newBoost.tag = "Boost";
+        }
+
+        Debug.Log("Generated " + count + " boosts or obstacles");
     }
 
 
@@ -78,4 +100,5 @@ public class AutodromInit : MonoBehaviour
 
         Debug.Log("Generated " + count + " cars");
     }
+
 }
