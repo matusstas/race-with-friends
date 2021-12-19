@@ -55,6 +55,7 @@ public class AutodromInit : MonoBehaviour
 
     private void GenerateNewCars(int count)
     {
+        Color[] colors = {Color.red, Color.green, Color.blue, Color.cyan, Color.gray, Color.magenta, Color.yellow, Color.white, Color.black, Color.gray};
         // creates new car objects, count is the number of cars to create
         for (int i = 0; i < count; i++)
         {
@@ -85,13 +86,18 @@ public class AutodromInit : MonoBehaviour
             if(mode=="all")
             {
                 newCar.GetComponent<CarController>().teamId = i;
-                newCar.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+                // newCar.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+                newCar.GetComponent<SpriteRenderer>().color = colors[i];
             }
-                
             else
             {
-                newCar.GetComponent<CarController>().teamId = i%2;
-                newCar.GetComponent<SpriteRenderer>().color = new Color(i%2,0,1);
+                if (i%2 == 0)
+                {
+                    newCar.GetComponent<SpriteRenderer>().color = Color.red;
+                } else 
+                {
+                    newCar.GetComponent<SpriteRenderer>().color = Color.blue;
+                }
             }
 
             // set car color to random color
