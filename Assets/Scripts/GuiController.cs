@@ -240,7 +240,7 @@ public class GuiController : MonoBehaviour
     private void ShowResults(List<string> results)
     {
         resultsPanel.SetActive(true);
-        resultsPanel.GetComponent<Image>().color=Color.red;
+        //resultsPanel.GetComponent<Image>().color=Color.red;
         resultsText.text="Results: \n";
         for(int i=0; i<results.Count; i++)
         {
