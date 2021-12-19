@@ -34,7 +34,6 @@ public class GuiController : MonoBehaviour
 
         // add listener
         GlobalEvents.CarStateChanged.AddListener(CarStateChanged);
-        GlobalEvents.CarDestroyed.AddListener(CheckWinCondition);
         GlobalEvents.CarTurnEnd.AddListener(ShowBoost);
         
 
@@ -47,7 +46,6 @@ public class GuiController : MonoBehaviour
     {
         // remove listener
         GlobalEvents.CarStateChanged.RemoveListener(CarStateChanged);
-        GlobalEvents.CarDestroyed.RemoveListener(CheckWinCondition);
         GlobalEvents.CarTurnEnd.RemoveListener(ShowBoost);
 
     }
@@ -129,84 +127,6 @@ public class GuiController : MonoBehaviour
         healthText.text = hText;
     }
 
-
-    private void CheckWinCondition(GameObject carToBeDestroyed)
-    {
-        int carCount = carsController.cars.Count;
-        if (PlayerPrefs.GetString("gameMode")=="autodrom")
-        {
-
-            if(PlayerPrefs.GetString("mode")=="all")
-            {
-                // pause the game if only one car is left
-                if (carCount == 1)
-                {
-                    // get first carController
-                    GameObject winner = carsController.cars[0];
-
-                    string carColor = ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color);
-                    string carName = winner.GetComponent<CarController>().name;
-
-                    carsController.results.Add("<color=#" + carColor + ">" + carName + "</color>");
-                    
-                    carsController.results.Reverse();
-                    ShowResults(carsController.results);
-                }
-
-                // or if no one is left
-                if (carCount == 0)
-                {
-                    winnerText.text = "No one won!";
-                    //Time.timeScale = 0;
-
-                    //ShowResults();
-                }
-            }
-
-            else
-            {
-                bool oneTeam=true;
-                int teamNum=-1;
-                foreach(GameObject car in carsController.cars)
-                {
-                    int num=car.GetComponent<CarController>().teamId;
-                    if (teamNum==-1)
-                        teamNum=num;
-                    if (num!=teamNum)
-                    {
-                        oneTeam=false;
-                        break;
-                    }
-                }
-                if (oneTeam)
-                {
-                    GameObject winner = carsController.cars[0];
-                    winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + "> Team" + winner.GetComponent<CarController>().teamId + "</color> " + " won!";
-                    //TODO obrazovka ktory team vyhral
-                    //ShowResults();
-                }
-
-            }
-        } else 
-        {
-            int originalCarCount = PlayerPrefs.GetInt("numberOfPlayers", 2);
-            if (originalCarCount - carCount == 1)
-            {
-                GameObject winner = carToBeDestroyed;
-                //winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + ">" + winner.GetComponent<CarController>().name + "</color> " + " won!";
-                string carColor = ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color);
-                string carName = winner.GetComponent<CarController>().name;
-
-                carsController.results.Add("<color=#" + carColor + ">" + carName + "</color>");
-            }
-            if (carCount == 1)
-            {
-                carsController.results.Add((string)carsController.cars[0].name);
-                ShowResults(carsController.results);
-            }
-        }
-    }
-
     private void ShowBoost()
     {
         Debug.Log("BOOST");
@@ -215,7 +135,7 @@ public class GuiController : MonoBehaviour
         CarController selectedCar = carsController.selectedCar.GetComponent<CarController>();
         Debug.Log(selectedCar.boost);
         if (selectedCar.boost){
-            boost=(GameObject)Instantiate(selectedCar.boost.gameObject, new Vector3(8,-4,0), Quaternion.identity);
+            boost=(GameObject)Instantiate(selectedCar.boost.gameObject, new Vector3(7.5f,-4,0), Quaternion.identity);
             boost.active=true;
         }
     }
@@ -249,7 +169,7 @@ public class GuiController : MonoBehaviour
         }
     }
 
-    private void ShowResults(List<string> results)
+    public void ShowResults(List<string> results)
     {
         resultsPanel.SetActive(true);
         //resultsPanel.GetComponent<Image>().color=Color.red;
@@ -259,4 +179,13 @@ public class GuiController : MonoBehaviour
             resultsText.text+=(i+1)+". place: "+results[i]+"\n";
         }
     }
+
+    public void ShowResultsOther(string text)
+    {
+        resultsPanel.SetActive(true);
+        //resultsPanel.GetComponent<Image>().color=Color.red;
+        resultsText.text="Results: \n"+text;
+
+    }
+
 }
