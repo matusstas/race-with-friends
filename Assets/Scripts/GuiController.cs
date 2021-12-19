@@ -107,8 +107,10 @@ public class GuiController : MonoBehaviour
     private void UpdateCarHealthGUI()
     {        
         string hText = "";
-        foreach (GameObject car in carsController.cars)
+        int carCount = PlayerPrefs.GetInt("numberOfPlayers");
+        for (int i = 0; i < carCount; i++)
         {
+            GameObject car = carsController.cars[i];
             if (car != null)
             {
                 string carColor = ColorUtility.ToHtmlStringRGB(car.GetComponent<SpriteRenderer>().color);
@@ -117,10 +119,10 @@ public class GuiController : MonoBehaviour
 
                 if (PlayerPrefs.GetString("gameMode") == "race")
                 {
-                    hText += "<color=#" + carColor + ">" + carName + "</color>\n";
+                    hText += "<color=#" + carColor + "> " + i + " " + carName + "</color>\n";
                 } else
                 {
-                    hText += "<color=#" + carColor + ">" + carName + "</color>: " + carHealth + "hp\n";
+                    hText += "<color=#" + carColor + "> " + i + " " + carName + "</color>: " + carHealth + "hp\n";
                 }
             }
         }
