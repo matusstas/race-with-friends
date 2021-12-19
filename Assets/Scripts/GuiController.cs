@@ -23,6 +23,7 @@ public class GuiController : MonoBehaviour
 
     public Button backBtn;
     private GameObject boost;
+    public Text boostWasPickedUpTxt;
 
     // subscribe to events
     void Awake()
@@ -34,8 +35,9 @@ public class GuiController : MonoBehaviour
 
         // add listener
         GlobalEvents.CarStateChanged.AddListener(CarStateChanged);
-        // GlobalEvents.CarTurnEnd.AddListener(ShowBoost);
-        
+        GlobalEvents.CarTurnEnd.AddListener(ShowBoost);
+        GlobalEvents.BoostPickedUp.AddListener(BoostPickedUp);
+
 
         // back button
         backBtn.onClick.AddListener(BackBtnClick);
@@ -46,8 +48,8 @@ public class GuiController : MonoBehaviour
     {
         // remove listener
         GlobalEvents.CarStateChanged.RemoveListener(CarStateChanged);
-        // GlobalEvents.CarTurnEnd.RemoveListener(ShowBoost);
-
+        GlobalEvents.CarTurnEnd.RemoveListener(ShowBoost);
+        GlobalEvents.BoostPickedUp.RemoveListener(BoostPickedUp);
     }
 
 
@@ -55,20 +57,21 @@ public class GuiController : MonoBehaviour
     void Start()
     {
         CarController selectedCar = carsController.selectedCar.GetComponent<CarController>();
-        if (selectedCar.boost){
-            boost=(GameObject)Instantiate(selectedCar.boost.gameObject, new Vector3(7.5f,-4,0), Quaternion.identity);
-            
+        if (selectedCar.boost)
+        {
+            boost = (GameObject)Instantiate(selectedCar.boost.gameObject, new Vector3(7.5f, -4, 0), Quaternion.identity);
+
         }
-        controlls=GameObject.FindGameObjectWithTag("Controlls");
+        controlls = GameObject.FindGameObjectWithTag("Controlls");
         controlls.SetActive(false);
         resultsPanel.SetActive(false);
-        Debug.Log("Results",resultsPanel);
+        Debug.Log("Results", resultsPanel);
     }
 
     // Update is called once per frame
     void Update()
     {
-        ShowBoost();
+        // ShowBoost();
         UpdateCarHealthGUI();
         UpdateSlidersGUI();
     }
@@ -106,7 +109,7 @@ public class GuiController : MonoBehaviour
     }
 
     private void UpdateCarHealthGUI()
-    {        
+    {
         string hText = "";
         int carCount = PlayerPrefs.GetInt("numberOfPlayers");
         for (int i = 0; i < carCount; i++)
@@ -121,7 +124,8 @@ public class GuiController : MonoBehaviour
                 if (PlayerPrefs.GetString("gameMode") == "race")
                 {
                     hText += "<color=#" + carColor + "> " + i + " " + carName + "</color>\n";
-                } else
+                }
+                else
                 {
                     hText += "<color=#" + carColor + "> " + i + " " + carName + "</color>: " + carHealth + "hp\n";
                 }
@@ -130,16 +134,33 @@ public class GuiController : MonoBehaviour
         healthText.text = hText;
     }
 
+    // boost was shown coroutine
+    private IEnumerator BoostPickedUpNotification()
+    {
+        Debug.Log("BoostPickedUpNotification started");
+        boostWasPickedUpTxt.text = "Boost was picked up";
+        yield return new WaitForSeconds(1);
+        boostWasPickedUpTxt.text = "";
+        Debug.Log("BoostPickedUpNotification ended");
+    }
+
+    private void BoostPickedUp()
+    {
+        StartCoroutine(BoostPickedUpNotification());
+        ShowBoost();
+    }
+
     private void ShowBoost()
     {
         Debug.Log("BOOST");
-        
+
         Destroy(boost);
         CarController selectedCar = carsController.selectedCar.GetComponent<CarController>();
         Debug.Log(selectedCar.boost);
-        if (selectedCar.boost){
-            boost=(GameObject)Instantiate(selectedCar.boost.gameObject, new Vector3(7.5f,-4,0), Quaternion.identity);
-            boost.active=true;
+        if (selectedCar.boost)
+        {
+            boost = (GameObject)Instantiate(selectedCar.boost.gameObject, new Vector3(7.5f, -4, 0), Quaternion.identity);
+            boost.active = true;
         }
     }
 
@@ -152,8 +173,9 @@ public class GuiController : MonoBehaviour
     {
         if (PlayerPrefs.GetString("gameMode") == "race")
         {
-            SceneManager.LoadScene("RaceScene");   
-        } else
+            SceneManager.LoadScene("RaceScene");
+        }
+        else
         {
             SceneManager.LoadScene("NamePlayersScene");
         }
@@ -162,10 +184,10 @@ public class GuiController : MonoBehaviour
 
     public void ShowControlls()
     {
-        if (controlls.activeSelf==true)
-            {
-                controlls.SetActive(false);
-            }
+        if (controlls.activeSelf == true)
+        {
+            controlls.SetActive(false);
+        }
         else
         {
             controlls.SetActive(true);
@@ -176,10 +198,10 @@ public class GuiController : MonoBehaviour
     {
         resultsPanel.SetActive(true);
         //resultsPanel.GetComponent<Image>().color=Color.red;
-        resultsText.text="Results: \n";
-        for(int i=0; i<results.Count; i++)
+        resultsText.text = "Results: \n";
+        for (int i = 0; i < results.Count; i++)
         {
-            resultsText.text+=(i+1)+". place: "+results[i]+"\n";
+            resultsText.text += (i + 1) + ". place: " + results[i] + "\n";
         }
     }
 
@@ -187,7 +209,7 @@ public class GuiController : MonoBehaviour
     {
         resultsPanel.SetActive(true);
         //resultsPanel.GetComponent<Image>().color=Color.red;
-        resultsText.text="Results: \n"+text;
+        resultsText.text = "Results: \n" + text;
 
     }
 
