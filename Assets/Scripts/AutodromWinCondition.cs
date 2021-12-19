@@ -95,10 +95,11 @@ public class AutodromWinCondition : MonoBehaviour
             }
             if (oneTeam)
             {
+                string[] colors={"RED","BLUE"};
                 GameObject winner = carsController.cars[0];
                 //winnerText.text = "<color=#" + ColorUtility.ToHtmlStringRGB(winner.GetComponent<SpriteRenderer>().color) + "> Team" + winner.GetComponent<CarController>().teamId + "</color> " + " won!";
                 //TODO obrazovka ktory team vyhral
-                guiController.ShowResultsOther(ColorizeCar(winner,"Team "+teamNum)+" won!!");
+                guiController.ShowResultsOther(ColorizeCar(winner,"Team "+colors[teamNum])+" won!!");
             }
         }
     }
