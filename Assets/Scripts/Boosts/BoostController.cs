@@ -5,7 +5,6 @@ using System;
 
 public class BoostController : MonoBehaviour
 {
-
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +19,13 @@ public class BoostController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("ZOBRATY BOOST");
+        Debug.Log("Boost");
         Debug.Log(other.GetComponent<CarController>().name);
+
         other.GetComponent<CarController>().boost = gameObject.GetComponent<BoostAction>();
+        
         Debug.Log(other.GetComponent<CarController>().boost);
         Debug.Log(gameObject.name);
-        //gameObject.SetActive(false);
 
         // trigger BoostPickedUp event
         GlobalEvents.BoostPickedUp.Invoke();

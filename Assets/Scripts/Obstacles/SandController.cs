@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SandController : MonoBehaviour
 {
-    // Obstacles will only be in race mode
+    // Obstacles are only in race mode
     // their goal is to reduce the chances of winning
     
     Collider2D other;
@@ -22,6 +22,8 @@ public class SandController : MonoBehaviour
     }
 
     private void RestoreForce(){
+        // return values back to normal
+        
         other.gameObject.GetComponent<CarController>().force=force;
         GlobalEvents.CarTurnEnd.RemoveListener(RestoreForce);
     }

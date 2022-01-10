@@ -13,6 +13,8 @@ public class ShieldController : BoostAction
     }
 
     private void RemoveShield(){
+        // return values back to normal
+        
         car.GetComponent<CarController>().shield=false;
         GlobalEvents.CarTurnEnd.RemoveListener(RemoveShield);
     }
