@@ -20,17 +20,14 @@ public class CopyObject : MonoBehaviour
     {
         // notes
         // instancia game object + nastavenie rovnakej pozicie + znici sa
-
-        // gameObject.transform.position.z = -1f;
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -2);
 
-        // copy current gameObject
+        // copy current gameobject
         GameObject copy = Instantiate(gameObject);
-        // GameObject copy = Instantiate(gameObject, transform);
         copy.transform.SetParent(gameObject.transform.parent);
         copy.transform.position = new Vector3(copy.transform.position.x, copy.transform.position.y, -1);
 
-        // detach this script
+        // detach script on the gameobject
         Destroy(gameObject.GetComponent<CopyObject>());
     }
 }

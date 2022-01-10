@@ -7,7 +7,6 @@ public class SliderController : MonoBehaviour
 {
     public Slider slider;
     public bool isRunning = true;
-    
     public float speed = 0.01f;
     public int direction = 1;
 
@@ -29,16 +28,19 @@ public class SliderController : MonoBehaviour
     {
         if (isRunning)
         {
+            // if slider reached its maximum value switch the direction (go down)
             if (slider.value >= slider.maxValue-speed)
             {
                 direction *= -1;
             }
 
+            // if slider reached its maximum value switch the direction (go up)
             if (slider.value <= slider.minValue+speed)
             {
                 direction *= -1;
             }
 
+            // increase value in actual direction (up / down)
             slider.value += speed * direction;
         }
     }

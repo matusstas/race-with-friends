@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class RaceWinCondition : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public CarsController carsController;
     public GuiController guiController;
+ 
+    // Start is called before the first frame update
     void Start()
     {
         GlobalEvents.CarDestroyed.AddListener(CheckWinCondition);
