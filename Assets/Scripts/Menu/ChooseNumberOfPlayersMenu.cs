@@ -5,32 +5,28 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 
-
 public class ChooseNumberOfPlayersMenu : MonoBehaviour
 {
+    // The goal is to select the number of players
+    
     public Button confirmBtn;
-    // public GameObject inputField;
-
+    public Button backBtn;
     public GameObject gameObjectInputField;
     public InputField inputField;
-    public Button backBtn;
-
-    // min and max number of players (included)
     public int minPlayers = 2;
     public int maxPlayers = 10;
 
     // Start is called before the first frame update
     void Start()
     {
+        // load input field and set it up
         gameObjectInputField = GameObject.FindGameObjectWithTag("InputField");
         inputField = gameObjectInputField.GetComponent<InputField>();
+        inputField.text = "";
 
-        // listener to click event
+        // add listeners to click events
         confirmBtn.onClick.AddListener(ConfirmBtnClick);
         backBtn.onClick.AddListener(BackBtnClick);
-
-        // inputField.text = PlayerPrefs.GetInt("numberOfPlayers", 2).ToString();
-        inputField.text = "";
     }
 
     // Update is called once per frame
@@ -41,6 +37,9 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
 
     bool ValidateInputField(string inputFieldText)
     {
+        // validate input by matching only numbers
+        // if matched number is in specific range (min-max incluced) return true
+        
         Regex regex = new Regex(@"^\d+$");
         if (regex.IsMatch(inputFieldText))
         {
@@ -58,16 +57,15 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
         }
     }
 
-
-    // on autodromBtn click
     public void ConfirmBtnClick()
     {
+        // when clicking on confirm button make sure the input is valid
+        // if it is, set assigned number of player for the game and load next scene
+
         if (ValidateInputField(inputField.text))
         {
             int numberOfPlayers = int.Parse(inputField.text);
             PlayerPrefs.SetInt("numberOfPlayers", numberOfPlayers);
-            // load race scene
-            // SceneManager.LoadScene("RaceScene");
             SceneManager.LoadScene("PlayScene");
         } else {
             Debug.Log("InputField: wrong number");
@@ -76,8 +74,6 @@ public class ChooseNumberOfPlayersMenu : MonoBehaviour
 
     public void BackBtnClick()
     {
-        // load main menu scene
-        // SceneManager.LoadScene("PlayScene");
         SceneManager.LoadScene("MainMenu");
     }
 }

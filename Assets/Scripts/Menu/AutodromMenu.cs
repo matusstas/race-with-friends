@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class AutodromMenu : MonoBehaviour
 {
+    // The goal is to choose between "Team vs. Team" and "All vs. All"
+    
     public Button allBtn;
     public Button teamBtn;
     public Button backBtn;
@@ -13,7 +15,7 @@ public class AutodromMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // listener to click event
+        // add listeners to click events
         allBtn.onClick.AddListener(AllBtnClick);
         teamBtn.onClick.AddListener(TeamBtnClick);
         backBtn.onClick.AddListener(BackBtnClick);
@@ -29,21 +31,21 @@ public class AutodromMenu : MonoBehaviour
     // on autodromBtn click
     public void AllBtnClick()
     {
-        // load race scene
+        // Set mode to "All vs. All" and to "Name Players" scene
         PlayerPrefs.SetString("mode", "all");
         SceneManager.LoadScene("NamePlayersScene");
     }
 
     public void TeamBtnClick()
     {
-        // load autodrom scene
-         PlayerPrefs.SetString("mode", "team");
+        // Set mode to "Team vs. Team" and to "Name Players" scene
+        PlayerPrefs.SetString("mode", "team");
         SceneManager.LoadScene("NamePlayersScene");
     }
 
     public void BackBtnClick()
     {
-        // load play scene
+        // go back
         SceneManager.LoadScene("PlayScene");
     }
 

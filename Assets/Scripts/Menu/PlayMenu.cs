@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayMenu : MonoBehaviour
 {
+    // The goal is to choose between race and autodrom mode
+    
     public Button raceBtn;
     public Button autodromBtn;
     public Button backBtn;
@@ -13,7 +15,7 @@ public class PlayMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // listener to click event
+        // add listeners to click events
         raceBtn.onClick.AddListener(RaceBtnClick);
         autodromBtn.onClick.AddListener(AutodromBtnClick);
         backBtn.onClick.AddListener(BackBtnClick);
@@ -25,13 +27,9 @@ public class PlayMenu : MonoBehaviour
         
     }
 
-
-    // on autodromBtn click
     public void RaceBtnClick()
     {
-        // load race scene
-        // SceneManager.LoadScene("ChooseNumberOfPlayersScene");
-        // SceneManager.LoadScene("RaceScene");
+        // go to "Name PLayers" scene, set mode to "All vs. All" and gamemode to race
         SceneManager.LoadScene("NamePlayersScene"); 
         PlayerPrefs.SetString("mode", "all");
         PlayerPrefs.SetString("gameMode","race");
@@ -39,15 +37,14 @@ public class PlayMenu : MonoBehaviour
 
     public void AutodromBtnClick()
     {
-        // load autodrom scene
+        // go to autodrom scene and set gamemode to autodrom
         SceneManager.LoadScene("AutodromMenuScene");
         PlayerPrefs.SetString("gameMode","autodrom");
     }
 
     public void BackBtnClick()
     {
-        // load main menu scene
-        // SceneManager.LoadScene("MainMenu");
+        // go back
         SceneManager.LoadScene("ChooseNumberOfPlayersScene");
     }
 }

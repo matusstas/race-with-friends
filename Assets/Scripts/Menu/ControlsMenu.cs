@@ -22,18 +22,19 @@ public class ControlsMenu : MonoBehaviour
         if (isHPressed == 1) {
             PlayerPrefs.SetInt("isHPressed", 0);
 
+            // go to specifi scene based on gamemode
             string gameMode = PlayerPrefs.GetString("gameMode");
             if (gameMode == "race")
             {
-                // load race scene
+                // go to "Race" scene
                 SceneManager.LoadScene("NewRace");
             } else
             {
-                // load autodrom scene
+                // go to "Autodrom" scene
                 SceneManager.LoadScene("AutodromScene");
             }
         } else {
-            // load main menu scene
+            // go to "Main menu" scene
             SceneManager.LoadScene("MainMenu");
         }
     }

@@ -6,21 +6,20 @@ using UnityEngine.UI;
 
 public class NamePlayersMenu : MonoBehaviour
 {
+    // The goal is change default player's name
+    
     public Button submitBtn;
     public Button backBtn;
-
     private int carCount;
-
     public InputField inputField;
-
     public List<InputField> inputFields = new List<InputField>();
-
     public GameObject teamTxts;
     public GameObject playersTxt;
 
 
     void Awake()
     {
+        // get number of players with default value of 2
         carCount = PlayerPrefs.GetInt("numberOfPlayers", 2);
         Debug.Log("carCount: " + carCount);
     }
@@ -28,13 +27,15 @@ public class NamePlayersMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // listener to click event
+        // add listeners to click events
         submitBtn.onClick.AddListener(SubmitBtnClick);
         backBtn.onClick.AddListener(BackBtnClick);
 
         GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
 
-        // race
+        // if mode "All vs. All" show 1 column
+        // if mode "Team vs. Team" show 2 columns (1 team = 1 column)
+        // during iteration instantiate input field with car names
         if (PlayerPrefs.GetString("mode") == "all")
         {
             for (int i = 0; i < carCount; i++)
@@ -66,10 +67,9 @@ public class NamePlayersMenu : MonoBehaviour
         inputFields[0].Select();
     }
 
-    // get name from Global.carNames if exists fron index
-    // else return "Car " + index
     private string generateCarName(int index)
     {
+        // get name from Global.carNames if exists from index otherwise return "Car " + index
         if (Global.carNames.Count > index)
         {
             return Global.carNames[index];
@@ -83,6 +83,8 @@ public class NamePlayersMenu : MonoBehaviour
 
     private Vector2 calculatePosition(int numberOfColumns, int columnIndex, int rowIndex)
     {
+        // calculate position of input field 
+
         // set offset based on i
         float paddingY = Screen.height / 5;
         float paddingX = Screen.height / 3;
@@ -120,12 +122,14 @@ public class NamePlayersMenu : MonoBehaviour
 
     public void SubmitBtnClick()
     {
+        // delete old player names and load new ones
         Global.carNames.Clear();
         foreach (InputField inputField in inputFields)
         {
             Global.carNames.Add(inputField.text);
         }
 
+        // got to specific scene based on gamemode
         if (PlayerPrefs.GetString("gameMode") == "autodrom")
         {
             SceneManager.LoadScene("AutodromScene");
@@ -138,13 +142,14 @@ public class NamePlayersMenu : MonoBehaviour
 
     public void BackBtnClick()
     {
+        // delete old player names and load new ones
         Global.carNames.Clear();
         foreach (InputField inputField in inputFields)
         {
             Global.carNames.Add(inputField.text);
         }
-        // Load autodrom scene
 
+        // go back to specific scene based on gamemode
         if (PlayerPrefs.GetString("gameMode") == "autodrom")
         {
             SceneManager.LoadScene("AutodromMenuScene");
@@ -155,9 +160,10 @@ public class NamePlayersMenu : MonoBehaviour
         }
     }
 
-    // on tab press move to next input field
     public void OnTabPress()
     {
+        // go to next input field by pressing tabulator
+
         // get focused input field
         InputField focusedInputField = null;
         foreach (InputField inputField in inputFields)

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    // The goal is to start the game or to read information about controls
     public Button playBtn;
     public Button controlsBtn;
     public Button exitGameBtn;
@@ -13,7 +14,7 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // listener to click event
+        // add listeners to click events
         playBtn.onClick.AddListener(PlayBtnClick);
         controlsBtn.onClick.AddListener(ControlsBtnClick);
         exitGameBtn.onClick.AddListener(ExitGameBtnClick);
@@ -27,21 +28,20 @@ public class Menu : MonoBehaviour
 
     public void PlayBtnClick()
     {
-        // load play scene
-        // SceneManager.LoadScene("PlayScene");
+        // go to "Choose number of players" scene
         SceneManager.LoadScene("ChooseNumberOfPlayersScene");
     }
 
     public void ControlsBtnClick()
     {
-        // load controls scene
+        // go to "Controls" scene
         SceneManager.LoadScene("ControlsScene");
     }
 
     public void ExitGameBtnClick()
     {
+        // Exit game
         Debug.Log("Exit game button clicked");
-        // exit game
         Application.Quit();
     }
 

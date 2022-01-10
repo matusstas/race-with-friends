@@ -10,6 +10,7 @@ public class ResultsMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // add listeners to click events
         againBtn.onClick.AddListener(AgainBtn);
         menuBtn.onClick.AddListener(MenuBtn);
     }
@@ -25,24 +26,27 @@ public class ResultsMenu : MonoBehaviour
         if (PlayerPrefs.GetString("gameMode") == "race")
         {
             int levelNumber = PlayerPrefs.GetInt("level");
-
             if (levelNumber == 0)
             {
+                // go to "Draw race" scene
                 SceneManager.LoadScene("DrawRaceScene");
             }
             else
             {
+                // go to "Race" scene
                 SceneManager.LoadScene("NewRace");
             }
         }
         else
         {
+            // go to "Autodrom" scene
             SceneManager.LoadScene("AutodromScene");
         }
     }
 
     void MenuBtn()
     {
+        // go to "Main menu" scene
         SceneManager.LoadScene("MainMenu");
     }
 }
