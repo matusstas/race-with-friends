@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class SandController : MonoBehaviour
 {
+    // Obstacles will only be in race mode
+    // their goal is to reduce the chances of winning
     
     Collider2D other;
     float force;
     private void OnTriggerEnter2D(Collider2D other){
-        Debug.Log("SAND");
+        // When passing over the obstacle, the velocity of the car is reduced by half
+        
+        Debug.Log("Sand");
         this.other=other;
         force=other.gameObject.GetComponent<CarController>().force;
         other.gameObject.GetComponent<CarController>().force/=5;
